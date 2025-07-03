@@ -1,0 +1,88 @@
+.wordCarousel span {
+    font: unset;
+}
+.wordCarousel div{
+    overflow: hidden;
+    position: relative;
+    height: 90px;
+    padding-top: 15px;
+    margin-top: -19px;
+}
+.wordCarousel div li{
+    color: #eee;
+    height: 45px;
+    margin-bottom: 45px;
+    display: block;
+    font-size: .8em;
+}
+.wordCarousel div li:nth-child(1){
+    color: #eee;
+}
+.wordCarousel div li:nth-child(2){
+    color:rgb(114, 134, 84);
+}
+.wordCarousel div li:nth-child(3){
+    color:rgb(139, 77, 77);
+}
+.wordCarousel div li:nth-child(4){
+    color:rgb(95, 87, 141);
+}
+.flip4 { animation: flip4 10s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+
+@keyframes flip4 {
+    0% { margin-top: -360px; }
+    5% { margin-top: -270px; }
+    25% { margin-top: -270px; }
+    30% { margin-top: -180px; }
+    50% { margin-top: -180px; }
+    55% { margin-top: -90px; }
+    75% { margin-top: -90px; }
+    80% { margin-top: 0px; }
+    99.99% { margin-top: 0px; }
+    100% { margin-top: -270px; }
+}
+
+.categ .bloc-content.in,.products .bloc-content.in{
+    
+    animation: append-animate 2s linear;
+    
+}
+@keyframes append-animate {
+	from {
+		transform: translateY(-10px);
+		opacity: 0;
+        visibility: hidden;
+	}
+	to {
+		transform: translateY(0px);
+		opacity: 1;
+        visibility: visible;
+	}
+}
+
+.show{
+    animation: show-animate 1s ease-in;
+    display: block;
+}
+.hide{
+    animation: hide-animate 1s ease-in;
+    display: none;
+}
+
+@keyframes show-animate {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes hide-animate {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
