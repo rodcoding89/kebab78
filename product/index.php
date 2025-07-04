@@ -7,8 +7,6 @@
     $title = "Découvrez nos produits";
     include_once '../inc/header.php';
     $content = '';
-    //$url = 'http://localhost/kebab/';
-    $url = 'http://localhost/kebab-gare/';
     if (isset($_GET)) {
         $cid = $_GET['access'];
         $deliveryMode = $_GET['delivery'];
@@ -32,7 +30,7 @@
             }
             
             $content .= '<a href="'.RACINE.'extrat?p='.$product['product_id'].'&c='.$product['categorie'].'&delivery='.$deliveryMode.'"><div class="card h-100">';
-            $content .='<img src="'.$url.$product['img_url'].'" class="card-img-top" alt="'.$product['product_name'].'">';
+            $content .='<img src="'.RACINE.$product['img_url'].'" class="card-img-top" alt="'.$product['product_name'].'">';
             $content .= '<div class="card-body"><h5 class="card-title">'.$product['product_name'].'</h5><p class="card-text">'.$product['description'].'</p>'.$prix.'</div>';
             $content .= '</div></a>';
         }

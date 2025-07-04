@@ -312,7 +312,13 @@ body.office{
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    width: 100%;
+    position: fixed;
+    z-index: 1111;
+    background: #fff;
+    box-shadow: 0px 0px 5px 1px darkgray;
+    width: 90%;
+    border-radius: .5rem;
+    padding: 15px;
 }
 .backoffice .header-content a.back{
     width: 180px;
@@ -369,6 +375,7 @@ body.office{
     width: 75%;
     margin: 30px auto;
     min-width: 290px;
+    margin: 110px auto 30px;
 }
 #formFile{
     line-height: 2.5;
@@ -383,24 +390,30 @@ body.office{
 .categ .bloc-content,.products .bloc-content{
     position: relative;
     display:flex;
-    justify-content:space-between;
+    justify-content:space-around;
     width: 100%;
     align-items: center;
     flex-wrap: wrap;
+    gap: 20px;
 }
-.categ .bloc-content a{
-    width: 32%;
+.categ .bloc-content .item-link{
+    width: 100%;
     height: 175px;
-    margin-bottom: 20px;
+    min-width: 280px;
+    max-width: 330px;
+    position: relative;
 }
 .products .bloc-content a{
-    width: 32%;
-    margin-bottom: 20px;
-}
-.categ .bloc-content .item{ 
     width: 100%;
-    position: relative;
+    min-width: 280px;
+    max-width: 330px;
+    margin-bottom: 20px;
+    align-self: stretch;
+}
+.categ .bloc-content .item-link .item{ 
+    width: 100%;
     height: 100%;
+    filter: brightness(0.5);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -411,16 +424,21 @@ body.office{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border-radius: 10px;
 }
-.categ .bloc-content .item .text{
-    text-align: center;
-}
-.categ .bloc-content .item .text h4{
-    color: #fff;
+.categ .bloc-content .item-link h4{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     z-index: 1;
 }
-.categ .bloc-content .item .text i{
+.categ .bloc-content .item-link i{
     color: #fff;
-    font-size: 2em;
+    font-size: 1em;
 }
 a.back{
     text-decoration: none;
@@ -505,20 +523,23 @@ a.back i{
 }
 .extrat .extrat-content .bloc-content .elm-bloc,.extrat .extrat-content .bloc-content .elm-bloc1,.extrat .bloc .bloc-item-content{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
+    gap: 35px;
     transition: all 1s;
 }
 .extrat .extrat-content .bloc-content .card{
-    width: 23.5%;
+    width: 100%;
+    max-width: 280px;
+    min-width: 180px;
     margin-bottom: 20px;
 }
 .extrat .extrat-content .bloc-content .card img.card-img-top{
     height: 120px;
 }
 .extrat .extrat-content .bloc-content .card .card-body input{
-    width: 30px;
+    width: 20px;
 }
 .elm .bloc h4{
     margin-bottom: 20px;

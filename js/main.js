@@ -422,6 +422,7 @@ $(function(){
             let pcateg = $(this).find('#p-categ option:selected').val();
             let sprix = $(this).find('#s-prix').val();
             let file = $(this).find('#formFile').get(0).files[0];
+            //console.log(sname,scateg,pcateg,file);
             if(sname == '' || scateg == '' || pcateg == '' || file == null || file == undefined){
                 alert('Vos données saisis ne sont pas corrects, revérifiez vos champs et retentez l\'insertion');
             }else{
@@ -585,10 +586,11 @@ $(function(){
 
     /**this function send a request to the server to get all extrat of products */
     function getExtratData(){
+        $('.backoffice .content .product-content').prepend('<i class="fa-solid fa-circle-notch"></i>');
         $.post(RACINE+'inc/controls.php',{postType:'getExtrat'},(res) => {
             setTimeout(() => {
                 if(res.resultat){
-                    let table = '<div class="all-s"><table class="table table-striped"><head><tr><th>Nom du supplément</th><th>Catégorie</th><th>prix</th><th>Image</th><th>Reférence</th><th>Action</th><thead><tbody>';
+                    let table = '<div class="all-s"><h3>Liste de suppléments</h3><table class="table table-striped"><head><tr><th>Nom du supplément</th><th>Catégorie</th><th>prix</th><th>Image</th><th>Reférence</th><th>Action</th><thead><tbody>';
                     let index = 0;
                     for(let i = 0; i<res.resultat.length;i++){
                         table += '<tr>';
@@ -603,7 +605,7 @@ $(function(){
                                 }
                             });
                         }
-                        table += '<td><i class="fas fa-cog setting" ><input type="hidden" value="'+res.resultat[i].extrat_id+'"></i><br><i class="fas fa-trash-alt delete"><input type="hidden" value="'+res.resultat[i].extrat_id+'"></i></td>';
+                        table += '<td><div style="display:flex;gap:10px;"><i class="fas fa-cog setting" style="cursor:pointer;"><input type="hidden" value="'+res.resultat[i].extrat_id+'"></i><i class="fas fa-trash-alt delete" style="cursor:pointer;"><input type="hidden" value="'+res.resultat[i].extrat_id+'"></i></div></td>';
                         table += '</tr>';
                     }
                     table += '</tbody></div>';
@@ -620,7 +622,7 @@ $(function(){
         $.post(RACINE+'inc/controls.php',{postType:'getProduct'},(res) => {
             setTimeout(() => {
                 if(res.resultat){
-                    let table = '<div class="all-s"><table class="table table-striped"><head><tr><th>Nom du produit</th><th>Catégorie</th><th>Description</th><th>Prix sans livraison</th><th>Prix avec livraison</th><th>Image</th><th>Action</th><thead><tbody>';
+                    let table = '<div class="all-s"><h3>Liste de produits</h3><table class="table table-striped"><head><tr><th>Nom du produit</th><th>Catégorie</th><th>Description</th><th>Prix sans livraison</th><th>Prix avec livraison</th><th>Image</th><th>Action</th><thead><tbody>';
                     res.resultat.map(el =>{
                         table += '<tr>';
                         table += '<td>'+el.product_name+'</td>';
@@ -635,7 +637,7 @@ $(function(){
                         table += '<td>'+el.prix_sans_livraison+'</td>';
                         table += '<td>'+el.prix_avec_livraison+'</td>';
                         table += '<td><img src="'+RACINE+el.img_url+'" style="width:80px;"/></td>';
-                        table += '<td><i class="fas fa-cog psetting" ><input type="hidden" value="'+el.product_id+'"></i><br><i class="fas fa-trash-alt pdelete"><input type="hidden" value="'+el.product_id+'"></i></td>';
+                        table += '<td><div style="display:flex;gap:10px;"><i class="fas fa-cog psetting" style="cursor:pointer;"><input type="hidden" value="'+el.product_id+'"></i><i class="fas fa-trash-alt pdelete" style="cursor:pointer;"><input type="hidden" value="'+el.product_id+'"></i></div></td>';
                         table += '</tr>';
                     });
                     table += '</tbody></div>';
@@ -651,13 +653,13 @@ $(function(){
         $.post(RACINE+'inc/controls.php',{postType:'getCategorie'},(res) => {
             setTimeout(() => {
                 if(res.resultat){
-                    let table = '<div class="all-s"><table class="table table-striped"><head><tr><th>Identifiant de la catégorie</th><th>Nom de la catégorie</th><th>Image</th><th>Action</th><thead><tbody>';
+                    let table = '<div class="all-s"><h3>Liste de catégorie</h3><table class="table table-striped"><head><tr><th>Identifiant de la catégorie</th><th>Nom de la catégorie</th><th>Image</th><th>Action</th><thead><tbody>';
                     res.resultat.map(el =>{
                         table += '<tr>';
                         table += '<td>'+el.categorie_id+'</td>';
                         table += '<td>'+el.categorie_name+'</td>';
                         table += '<td><img src="'+RACINE+el.img_url+'" style="width:80px;"/></td>';
-                        table += '<td><i class="fas fa-cog csetting" ><input type="hidden" value="'+el.categorie_id+'"></i><br><i class="fas fa-trash-alt cdelete"><input type="hidden" value="'+el.categorie_id+'"></i></td>';
+                        table += '<td><div style="display:flex;gap:10px;"><i class="fas fa-cog csetting" style="cursor:pointer;"><input type="hidden" value="'+el.categorie_id+'"></i><i class="fas fa-trash-alt cdelete" style="cursor:pointer;"><input type="hidden" value="'+el.categorie_id+'"></i></div></td>';
                         table += '</tr>';
                     });
                     table += '</tbody></div>';
@@ -724,7 +726,7 @@ window.addEventListener('load',() =>{
                     if(res.resultat){
                         let content = `<div class="categ-content"><div class="bloc-content">`;
                         res.resultat.map(el =>{
-                            content += `<a href="${RACINE}product?access=${el.categorie_id}&delivery=${commandeType}"><div class="item" style="background-image:url(${RACINE+el.img_url})"><img src="${RACINE+el.img_url}" alt="${el.categorie_name}" style="display:none"><div class="text"><h4>${el.categorie_name.toUpperCase()}</h4><i class="fas fa-plus"></i></div></div></a>`;
+                            content += `<a class="item-link" href="${RACINE}product?access=${el.categorie_id}&delivery=${commandeType}"><div class="item" style="background-image:url(${RACINE+el.img_url})"><img src="${RACINE+el.img_url}" alt="${el.categorie_name}" style="display:none"><div class="text"></div></div><h4><i class="fas fa-plus"></i>${el.categorie_name.toUpperCase()}</h4></a>`;
                         });
                         content += '</div></div>';
                         $('main .categ').append(content);
@@ -754,8 +756,8 @@ window.addEventListener('load',() =>{
                         el.classList.remove('show');
                         el.classList.add('hide');
                     }
-                    el.classList.add('active');
                 }
+                el.classList.add('active');
             });
             $('body main .extrat .elm-content .active.show .bloc-item').find('.card').each(function(index){
                 //console.log('card ',index);
@@ -793,9 +795,9 @@ window.addEventListener('load',() =>{
                     let margin = getMaxHeight($(this)) - innerHeight
                     console.log(innerHeight);
                     $(this).find('.card-body').css({paddingBottom:margin+'px'});
-                    let path = document.querySelectorAll('body main .extrat .elm-content .active.show .bloc-item .card');
-                    console.log('cardbodyH ',getMaxHeight(paht));
-                    console.log('path ',$(this).find('.card-body').parent());
+                    //let path = document.querySelectorAll('body main .extrat .elm-content .active.show .bloc-item .card');
+                    //console.log('cardbodyH ',getMaxHeight(paht));
+                    //console.log('path ',$(this).find('.card-body').parent());
         
                 });
                 

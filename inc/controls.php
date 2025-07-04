@@ -262,14 +262,19 @@ if (isset($_POST)) {
         echo json_encode($res);
     } elseif ($_POST['postType'] == 'updateCategorie') {
         if (isset($_FILES['file'])) {
-            $path = '../' . $_POST['img_url'];
-            if (file_exists($path) && !empty($_POST['img_url'])) {
-                unlink($path);
+            $parentPaht = dirname(__DIR__);
+            $uploadDir = $parentPaht.'/assets/images/product-images/';
+            // Vérifiez si le répertoire existe, sinon créez-le
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true); // Le troisième paramètre true permet de créer des répertoires imbriqués
             }
-            $img = uniqid() . '_' . basename($_FILES['file']['name']);
-            $folder = '../assets/images/product-images/';
-            if (move_uploaded_file($_FILES['file']['tmp_name'], $folder . $img)) {
-                $dburl = 'assets/images/product-images/' . $img;
+            $img = $uploadDir . basename($_FILES['file']['name']);
+            if (file_exists($img) && !empty($_POST['img_url'])) {
+                unlink($img);
+            }
+            
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $img)) {
+                $dburl = 'assets/images/product-images/' . basename($_FILES['file']['name']);
                 $result = actionQuery("UPDATE categorie SET categorie_name = :cname, img_url = :imgurl WHERE categorie_id = :cid", array(
                     ':cid' => $_POST['cid'],
                     ':cname' => $_POST['cname'],

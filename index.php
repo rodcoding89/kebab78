@@ -28,14 +28,14 @@
                             <span class="input-group-text" id="addon-wrapping"><i class="fas fa-fingerprint"></i></span>
                             <input type="text" class="form-control idf" placeholder="Identifiant" aria-label="Identifiant" aria-describedby="addon-wrapping" value="kebab78-1" disabled="true">
                         </div>
-                        <div class="new-message-box">
+                        <!--<div class="new-message-box">
                             <div class="new-message-box-danger">
                                 <div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div>
                                 <div class="tip-box-danger">
                                    <p>error</p>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <!--<div class="new-message-box">
                             <div class="new-message-box-info">
                                 <div class="info-tab tip-icon-info" title="info"><i class="fas fa-info"></i><i></i></div>

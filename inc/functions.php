@@ -1,4 +1,11 @@
 <?php
+    function debug($variable){
+        echo '<div style = "border: 1px solid orange">';
+                    echo '<pre>';
+                    print_r($variable);
+                    echo '</pre>';
+            echo '</div>';
+    }
     /**this function check if a giving email respect the nomenclature about the email (check if a giving text is a email or not) */
     function verifyEmail($email){
         if (filter_var($email,FILTER_VALIDATE_EMAIL)) {
