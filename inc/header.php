@@ -11,9 +11,13 @@
     <link rel="stylesheet" href="<?php echo RACINE.'style/animations.css'?>">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title><?php echo $title; ?></title>
 </head>
 <body>
+    <header>
+        <div class="cart-icon" onclick="openCart()">
+            <i class="fas fa-cart-plus"></i>
+            <span class="cart-count"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?></span>
+        </div>
+    </header>
    <main>

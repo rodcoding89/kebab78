@@ -315,6 +315,30 @@ if (isset($_POST)) {
             $res['sqlError'] = "Une erreur s'est produite. Veuillez réessayer plus tard";
         }
         echo json_encode($res);
+    } elseif($_POST['postType'] == 'addCart'){
+        $product = $_POST['product'];
+        $productId = $product['productId'];
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+        if (isset($_SESSION['cart'][$productId])) {
+            $_SESSION['cart'][$productId]['quantity'] += 1;
+        }else {
+            $_SESSION['cart'][$productId] = [
+                'id' => $productId,
+                'name' => $product['productName'],
+                'price' => $product['productPrice'],
+                'image' => $product['productImg'],
+                'quantity' => 1,
+                'extract'=>$product['extract']
+            ];
+            $_SESSION['id'] = $productId;
+            $_SESSION['mode'] = $product['deliveryMode'];
+            $_SESSION['cid'] = $product['cid'];
+        }
+        $res["result"] = "product_added";
+        $res["count"] = count($_SESSION["cart"]);
+        echo json_encode($res);
     }
 }
 ?>

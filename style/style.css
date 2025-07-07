@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Glory:wght@100;200;300;400;500;600;700;800&display=swap');
 /*global setting*/
+:root {
+    --primary: #4a6bff;
+    --secondary: #f8f9fa;
+    --dark: #343a40;
+    --light: #ffffff;
+    --danger: #ed2d3f;
+}
 body{
     padding: 0;
     margin: 0;
@@ -114,6 +121,12 @@ h6{
 
 .tip-box-success, .tip-box-danger, .tip-box-info {
     padding: 12px 8px 3px 26px;
+}
+/*****************************HEADER*****************************************/
+header{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
 }
 /*success*/
 .new-message-box-success {
@@ -285,6 +298,191 @@ body .input-group-text{
     font-size: 1.798em;
     color:#2175FF;
 }
+/***************************CART******************************/
+.cart-icon {
+    width: max-content;
+    position: absolute;
+    top: 28px;
+    height: auto;
+    right: 35px;
+    cursor: pointer;
+}
+.cart-icon i{
+    font-size: 1.5rem;
+    color: yellowgreen;
+}
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgba(33, 117, 255,.7);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #3a56d4;
+}
+
+/* Modal Panier */
+.cartBox{
+    min-width: 280px;
+    max-width: 970px;
+    width: 100%;
+    margin: 0 auto;
+}
+.cart-modal {
+    background-color: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 100%;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-items {
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.cart-item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.cart-item-details {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cart-item-title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    gap: 30px;
+}
+
+.quantity-btn {
+    width: 25px !important;
+    height: 25px !important;
+    background-color: #f0f0f0 !important;
+    border: none;
+    cursor: pointer !important;
+    display:  flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.remove-item {
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer !important;
+    padding: 10px 20px !important;
+    border-radius: .5rem;
+}
+
+.cart-summary {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: #3a56d4;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
 /*backoffice*/
 tr td i{
     color: yellowgreen;
@@ -390,7 +588,7 @@ body.office{
 .categ .bloc-content,.products .bloc-content{
     position: relative;
     display:flex;
-    justify-content:space-around;
+    justify-content:flex-start;
     width: 100%;
     align-items: center;
     flex-wrap: wrap;
@@ -470,6 +668,7 @@ a.back i{
 .card .card-body span{
     color: lightcoral;
     font-weight: bold;
+    display: block;
 }
 .card .card-body p{
     font-size: 1em;
@@ -501,25 +700,23 @@ a.back i{
 }
 .extrat .extrat-content .bloc-content .move p{
     display: flex;
+    cursor: pointer;
     align-items: center;
     border: 1px solid yellowgreen;
-    padding: 10px;
+    padding: 10px 20px;
     justify-content: center;
     border-radius: 5px;
     color: yellowgreen;
+    gap: 10px;
+    font-size: 1.2em;
 }
 .extrat .extrat-content .bloc-content .move p.next i{
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: yellowgreen;
     margin-left: 10px;
 }
-.extrat .extrat-content .bloc-content .move p.close i{
-    font-size: 1.5em;
-    color: lightcoral;
-    margin-right: 10px;
-}
 .extrat .extrat-content .bloc-content .move a{
-    font-size: 1em;
+    font-size: 1.2em;
 }
 .extrat .extrat-content .bloc-content .elm-bloc,.extrat .extrat-content .bloc-content .elm-bloc1,.extrat .bloc .bloc-item-content{
     display: flex;
@@ -546,8 +743,19 @@ a.back i{
     text-transform: uppercase;
     color: lightcoral;
 }
-.extrat .movebtn{
+.movebtn{
     display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid yellowgreen;
+    border-radius: 5px;
+    padding: 8px 20px;
+}
+.movebtn i{
+    font-size: 1.2em;
+    color: lightcoral;
+    margin-right: 10px;
 }
 .extrat .btnprev{
     margin-left: 15px;

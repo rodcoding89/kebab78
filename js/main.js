@@ -778,12 +778,97 @@ window.addEventListener('load',() =>{
                 if($('body main .extrat .elm-content').find('.active.show').next('.active.hide').length){
                     $('.extrat .movebtn .btnprev').remove();
                     $('body main .extrat .elm-content').find('.active.show').removeClass('show').addClass('hide').next('.active.hide').removeClass('hide').addClass('show');
-                    $('.extrat .movebtn').append('<a class="btnprev"><p class="prev"><i class="fas fa-chevron-left"></i> Précédent</p></a>');
+                    $('.extrat .movebtn').append('<p class="btnprev"><i class="fas fa-chevron-left"></i> Précédent</p>');
                     if(!$('body main .extrat .elm-content').find('.active.show').next('.active.hide').length){
                         $('.extrat .next').css({display:'none'});
-                        $('.extrat .cart').prepend('<a class="cartbtn"><p class="next">AJOUTER AU PANIER <i class="fas fa-chevron-right"></i></p></a>');
+                        $('.extrat .cart').prepend('<p class="cartbtn"><span class="next">AJOUTER AU PANIER <i class="fas fa-chevron-right"></i></span></p>');
                     }
                 }
+                
+                $('body main .extrat .move').on('click',".cartbtn",()=>{
+                    const salade = document.getElementById("salades");
+                    const tomate = document.getElementById("tomates");
+                    const oignon = document.getElementById("oignons");
+                    const sauceB = document.getElementById("sauce-barbequie");
+                    const mayonaise = document.getElementById("moyonaise");
+                    const ketchop = document.getElementById("sauce-ketchop");
+                    const sauceBlanche = document.getElementById("sauce-blanche");
+                    const thon = document.getElementById("thon");
+                    const poulet = document.getElementById("poulet");
+                    const steak = document.getElementById("steak");
+                    const socisse = document.getElementById("socisse");
+                    const kefta = document.getElementById("kefta");
+                    const socisseCury = document.getElementById("socisse-au-curry");
+                    const bouletteViande = document.getElementById("boulette-de-viande");
+                    const thonPrice = document.getElementById("thon-price");
+                    const pouletPrice = document.getElementById("poulet-price");
+                    const steakPrice = document.getElementById("steak-price");
+                    const socissePrice = document.getElementById("socisse-price");
+                    const keftaPrice = document.getElementById("kefta-price");
+                    const socisseCuryPrice = document.getElementById("socisse-au-curry-price");
+                    const bouletteViandePrice = document.getElementById("boulette-de-viande-price");
+                    const product = {
+                        productName:document.getElementById("productName").value,
+                        productPrice:document.getElementById("productPrice").value,
+                        productImg:document.getElementById("productImg").value,
+                        productId:document.getElementById("productId").value,
+                        deliveryMode:document.getElementById("deliveryMode").value,
+                        cid:document.getElementById("catId").value,
+                        extract:[
+                            {
+                                oignon:oignon ? oignon.checked : null,
+                                tomate:tomate ? tomate.checked : null,
+                                salade:salade ? salade.checked : null
+                            },
+                            {
+                                sauceBarbequie:sauceB ? sauceB.checked : null,
+                                sauceBlanche:sauceBlanche ? sauceBlanche.checked : null,
+                                ketchop:ketchop ? ketchop.checked : null,
+                                mayonaise:mayonaise ? mayonaise.checked : null
+                            },
+                            {
+                                poulet:{check:poulet ? poulet.checked : null,price:pouletPrice ? pouletPrice.value : 0},
+                                steak:{check:steak ? steak.checked : null,price:steakPrice ? steakPrice.value : 0},
+                                socisse:{check:socisse ? socisse.checked : null,price:socissePrice ? socissePrice.value : 0},
+                                kefta:{check:kefta ? kefta.checked : null,price:keftaPrice ? keftaPrice.value : 0},
+                                socisseCurry:{check:socisseCury ? socisseCury.checked : null,price:socisseCuryPrice ? socisseCuryPrice.value : 0},
+                                bouletViande:{check:bouletteViande ? bouletteViande.checked : null,price:bouletteViandePrice ? bouletteViandePrice.value : 0}
+                            },
+                            {
+                                thon:{check:thon ? thon.checked : null,price:thonPrice ? thonPrice.value : 0}
+                            },
+                            {},
+                            {}
+                        ]
+                    };
+                    console.log("product",product);
+                    const data = {
+                        postType:"addCart",
+                        product:product
+                    };
+                    $.post(RACINE + 'inc/controls.php', data, (res) => {
+                        if (res.result === 'product_added') {
+                            // Traitez ici la réponse réussie, par exemple :
+                            console.log("res",res);
+                            const cartCount = $('.cart-count');
+                            cartCount.html(res.count);
+                            const cart = $('.move .cart');
+                            const success = '<div class="success" style="color:white;padding:5px 10px;font-size:10px;border-radius:.5rem;background-color:olivedrab;width:max-content;">Produit ajouté</div>';
+                            cart.append(success);
+                            setTimeout(()=>{
+                                $('.move .cart .success').remove();
+                            },3000);
+                            //console.log("cartCount",cartCount);
+                            // Mettez à jour l'interface utilisateur si nécessaire
+                        } else {
+                            alert("Erreur lors de l'ajout du produit");
+                        }
+                    }, 'json')
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX :", textStatus, errorThrown);
+                        alert("Erreur lors de la requête AJAX. Veuillez consulter la console pour plus de détails.");
+                    });
+                });
                     
                 $('body main .extrat .elm-content .active.show .bloc-item .card').each(function(index){
                     console.log('card ',index);
@@ -818,6 +903,9 @@ window.addEventListener('load',() =>{
         });
     }
 });
+function openCart(){
+    window.location.href = RACINE+'cart';
+}
 function getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
