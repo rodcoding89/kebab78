@@ -124,8 +124,10 @@
                 <?php echo $pprix ?>
             </div>
             <div class="move">
-                <a class="movebtn" href="<?php echo RACINE.'product?access='.$cid.'&delivery='.$deliveryMode?>"><i class="fas fa-times"></i>FERMER</a>
-                <div class="cart"><p class="next">SUIVANT <i class="fas fa-chevron-right"></i></p></div>
+                <div class="moveLeft">
+                    <a class="close" href="<?php echo RACINE.'product?access='.$cid.'&delivery='.$deliveryMode?>"><i class="fas fa-times"></i>FERMER</a>
+                </div>
+                <?php echo !empty($composition) || !empty($legume) || !empty($sauce) || !empty($viande) || !empty($poison) || !empty($poison) ? '<div class="cart"><p class="next">SUIVANT <i class="fas fa-chevron-right"></i></p></div>' : ''; ?>
             </div>
             <div class="elm">
                 <div class="elm-content">
@@ -155,50 +157,56 @@
                             <?php
                         }
                     ?>
-                    <div class="elm-bloc2 bloc">
-                        <?php
+                    <?php
                         if($legume !== ''){
                             ?>
-                                <div class="bloc-item">
-                                    <h4 class="l-title"><?php echo $CategorieNameL;?></h4>
-                                    <div class="elm-bloc d-flex gap-4">
-                                        <?php  echo $legume?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="l-title"><?php echo $CategorieNameL;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $legume?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php
                         }
                         if($viande !== ''){
                             ?>
-                                <div class="bloc-item">
-                                    <h4 class="v-title"><?php echo $CategorieNameV;?></h4>
-                                    <div class="elm-bloc d-flex gap-4">
-                                        <?php  echo $viande?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="v-title"><?php echo $CategorieNameV;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $viande?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php
                         }
                         if($poisson !== ''){
                             ?>
-                                <div class="bloc-item">
-                                    <h4 class="p-title"><?php echo $CategorieNameP;?></h4>
-                                    <div class="elm-bloc d-flex gap-4">
-                                        <?php  echo $poisson?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="p-title"><?php echo $CategorieNameP;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $poisson?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php
                         }
                         if($fromage !== ''){
                             ?>
-                                <div class="bloc-item">
-                                    <h4 class="f-title"><?php echo $CategorieNameF;?></h4>
-                                    <div class="elm-bloc d-flex gap-4">
-                                        <?php  echo $fromage?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="f-title"><?php echo $CategorieNameF;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $fromage?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php
                         }
-                        ?>
-                    </div>
+                    ?>
                 </div>
             </div>
         </div>

@@ -359,7 +359,7 @@ body .input-group-text{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 50px 20px 20px;
     border-bottom: 1px solid #ddd;
     width: 100%;
 }
@@ -427,6 +427,7 @@ body .input-group-text{
     display:  flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
 }
 
 .quantity-input {
@@ -447,18 +448,32 @@ body .input-group-text{
 .cart-summary {
     padding: 20px;
     border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .cart-total {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.cart-total span{
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 20px;
+}
+
+.cart-total em{
+    font-size: 15px;
+    font-weight: 500;
+    color: #ccc;
 }
 
 .checkout-btn {
-    width: 100%;
+    width: max-content;
     padding: 12px;
     background-color: var(--primary);
     color: white;
@@ -466,6 +481,7 @@ body .input-group-text{
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 15px;
     transition: background-color 0.3s;
 }
 
@@ -482,6 +498,80 @@ body .input-group-text{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
+}
+.client{
+    min-width: 280px;
+    max-width: 1020px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 20px 20px;
+}
+/************************CONFIMATION************************************/
+.confirmation-container {
+    max-width: 800px;
+    margin: 50px auto;
+}
+.confirmation-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.confirmation-header {
+    background-color: #198754;
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+}
+.order-details {
+    border-left: 1px solid #dee2e6;
+}
+@media (max-width: 768px) {
+    .order-details {
+        border-left: none;
+        border-top: 1px solid #dee2e6;
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+}
+/****************************************CLIENT*********************************/
+.checkout-container {
+    max-width: 1200px;
+    margin: 30px auto;
+}
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.card-header {
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+}
+.form-label {
+    font-weight: 500;
+}
+#suggestions {
+    position: absolute;
+    z-index: 1000;
+    width: calc(100% - 30px);
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 4px 4px;
+    display: none;
+}
+.suggestion-item {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 /*backoffice*/
 tr td i{
@@ -689,6 +779,12 @@ a.back i{
     align-items: center;
     margin-bottom: 30px;
 }
+.extrat .extrat-content .bloc-content .move .moveLeft{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
 .extrat .extrat-content .bloc-content .top h4{
     color: yellowgreen;
     text-transform: uppercase;
@@ -698,7 +794,7 @@ a.back i{
     font-weight: bold;
     font-size: 1.7em;
 }
-.extrat .extrat-content .bloc-content .move p{
+.extrat .extrat-content .bloc-content .move p,.close{
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -709,9 +805,15 @@ a.back i{
     color: yellowgreen;
     gap: 10px;
     font-size: 1.2em;
+    margin: 0;
 }
-.extrat .extrat-content .bloc-content .move p.next i{
-    font-size: 1.2em;
+
+.close i{
+    color: coral;
+    font-size: 1rem;
+}
+.extrat .extrat-content .bloc-content .move p.next i,.extrat .btnprev p i{
+    font-size: 1em;
     color: yellowgreen;
     margin-left: 10px;
 }
@@ -755,13 +857,5 @@ a.back i{
 .movebtn i{
     font-size: 1.2em;
     color: lightcoral;
-    margin-right: 10px;
-}
-.extrat .btnprev{
-    margin-left: 15px;
-}
-.extrat .btnprev p i{
-    font-size: 1.5em;
-    color: yellowgreen;
     margin-right: 10px;
 }
