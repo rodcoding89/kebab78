@@ -49,10 +49,12 @@ function handleExtrat($productId){
                     }
                 }
                 $extratAdded = implode(", ", $extratKey);
-                if($i == 2){
-                    $response[$i] = 'Viande : '.$extratAdded;
-                }else{
-                    $response[$i] = 'Poison : '.$extratAdded;
+                if(count($extratKey) > 0){
+                    if($i == 2){
+                        $response[$i] = 'Viande : '.$extratAdded;
+                    }else{
+                        $response[$i] = 'Poison : '.$extratAdded;
+                    }
                 }
             }
         }
@@ -123,6 +125,7 @@ function handleExtrat($productId){
                 $total = $subtotal + $extract;
             ?>
             <div class="cart-summary">
+                <div class="summary-sec">
                     <div class="cart-total">
                         <span>Extrat:</span>
                         <em> <?php echo number_format($extract, 2); ?> €</em>
@@ -135,8 +138,8 @@ function handleExtrat($productId){
                         <span>Total:</span>
                         <em> <?php echo number_format($total, 2); ?> €</em>
                     </div>
-                    <a href="<?php echo RACINE.'client'; ?>" class="checkout-btn">Passer la commande</a>
                 </div>
+                <a href="<?php echo RACINE.'client'; ?>" class="checkout-btn">Passer la commande</a>
             <?php endif; ?>
     </div>
 </div>

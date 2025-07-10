@@ -9,16 +9,19 @@
     $content = '';
     $composition = '';
     $sauce = '';
-    $legume = '';
+    $burger = '';
     $viande = '';
-    $poisson = '';
-    $fromage = '';
+    $sandwichs = '';
+    $boisson = '';
+    $dessert = '';
     $CategorieNameC = '';
-    $CategorieNameL = '';
+    $CategorieNameB = '';
     $CategorieNameV = '';
     $CategorieNameP = '';
-    $CategorieNameF = '';
+    $CategorieNameD = '';
     $CategorieNameS = '';
+    $CategorieNameSW = '';
+    $CategorieNameBG = '';
     $autre = '';
     $otherArr = [];
     if (isset($_GET)) {
@@ -67,13 +70,13 @@
                 $CategorieNameS = $extrat['extrat_categ'];
                 $sauce .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="c-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
             }
-            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'légume'){
+            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'sandwichs'){
                 $prix = '';
                 if(floatval($extrat['prix']) > 0.0){
                     $prix = '<span>'.$extrat['prix'].'<em>€</em></span>';
                 }
-                $CategorieNameL = $extrat['extrat_categ'];
-                $legume .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="l-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
+                $CategorieNameSW = $extrat['extrat_categ'];
+                $sandwichs .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="l-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
             }
             if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'viande'){
                 $prix = '';
@@ -83,26 +86,29 @@
                 $CategorieNameV = $extrat['extrat_categ'];
                 $viande .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['prix'].'" id='.str_replace(" ", "-", strtolower($extrat['extrat_name']))."-price".'><input type="hidden" value="'.$extrat['extrat_categ'].'" id="v-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
             }
-            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'poisson'){
+            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'burger'){
                 $prix = '';
                 if(floatval($extrat['prix']) > 0.0){
                     $prix = '<span>'.$extrat['prix'].'<em>€</em></span>';
                 }
-                $CategorieNameP = $extrat['extrat_categ'];
-                $poisson .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="p-name"><input type="hidden" value="'.$extrat['prix'].'" id='.str_replace(" ", "-", strtolower($extrat['extrat_name']))."-price".'><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
+                $CategorieNameBG = $extrat['extrat_categ'];
+                $burger .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="p-name"><input type="hidden" value="'.$extrat['prix'].'" id='.str_replace(" ", "-", strtolower($extrat['extrat_name']))."-price".'><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
             }
-            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'fromage'){
+            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'boisson'){
                 $prix = '';
                 if(floatval($extrat['prix']) > 0.0){
                     $prix = '<span>'.$extrat['prix'].'<em>€</em></span>';
                 }
-                $CategorieNameF = $extrat['extrat_categ'];
-                $fromage .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="f-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
+                $CategorieNameB = $extrat['extrat_categ'];
+                $boisson .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="f-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
             }
-            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'sauce' && $extrat['extrat_categ'] === 'viande' && $extrat['extrat_categ'] === 'poisson' && $extrat['extrat_categ'] === 'légume' && $extrat['extrat_categ'] === 'composition'){
-                $autre .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="f-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='. str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
-                $otherArr[i] = $autre;
-                $i++;
+            if(isset($extrat['extrat_categ']) && $extrat['extrat_categ'] === 'dessert'){
+                $prix = '';
+                if(floatval($extrat['prix']) > 0.0){
+                    $prix = '<span>'.$extrat['prix'].'<em>€</em></span>';
+                }
+                $CategorieNameD = $extrat['extrat_categ'];
+                $dessert .= '<div class="card align-self-stretch h-100"><input type="hidden" value="'.$extrat['extrat_categ'].'" id="f-name"><img src="'.RACINE.$extrat['img_url'].'" class="card-img-top" alt="'.$extrat['extrat_name'].'"><div class="card-body"><h5 class="card-title">'.$extrat['extrat_name'].'</h5>'.$prix.'<input type="checkbox" id='.str_replace(" ", "-", strtolower($extrat['extrat_name'])).'></div></div>';
             }
         }
         
@@ -158,13 +164,49 @@
                         }
                     ?>
                     <?php
-                        if($legume !== ''){
+                        if($boisson !== ''){
                             ?>
                                 <div class="bloc-legume bloc">
                                     <div class="bloc-item">
-                                        <h4 class="l-title"><?php echo $CategorieNameL;?></h4>
+                                        <h4 class="l-title"><?php echo $CategorieNameB;?></h4>
                                         <div class="elm-bloc d-flex gap-4">
-                                            <?php  echo $legume?>
+                                            <?php  echo $boisson?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                        if($burger !== ''){
+                            ?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="p-title"><?php echo $CategorieNameBG;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $burger?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                        if($sandwichs !== ''){
+                            ?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="f-title"><?php echo $CategorieNameSW;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $sandwichs?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                        if($dessert !== ''){
+                            ?>
+                                <div class="bloc-legume bloc">
+                                    <div class="bloc-item">
+                                        <h4 class="f-title"><?php echo $CategorieNameD;?></h4>
+                                        <div class="elm-bloc d-flex gap-4">
+                                            <?php  echo $dessert?>
                                         </div>
                                     </div>
                                 </div>
@@ -177,30 +219,6 @@
                                         <h4 class="v-title"><?php echo $CategorieNameV;?></h4>
                                         <div class="elm-bloc d-flex gap-4">
                                             <?php  echo $viande?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                        }
-                        if($poisson !== ''){
-                            ?>
-                                <div class="bloc-legume bloc">
-                                    <div class="bloc-item">
-                                        <h4 class="p-title"><?php echo $CategorieNameP;?></h4>
-                                        <div class="elm-bloc d-flex gap-4">
-                                            <?php  echo $poisson?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                        }
-                        if($fromage !== ''){
-                            ?>
-                                <div class="bloc-legume bloc">
-                                    <div class="bloc-item">
-                                        <h4 class="f-title"><?php echo $CategorieNameF;?></h4>
-                                        <div class="elm-bloc d-flex gap-4">
-                                            <?php  echo $fromage?>
                                         </div>
                                     </div>
                                 </div>

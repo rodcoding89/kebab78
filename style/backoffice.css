@@ -1,0 +1,186 @@
+/*backoffice*/
+tr td i{
+    color: yellowgreen;
+}
+body{
+    main{
+        height: 100%;
+        display: block;
+    }
+}
+.backoffice{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 90%;
+    margin: 50px auto;
+}
+.backoffice header{
+    width: 100%;
+    position: relative;
+    
+}
+.backoffice .header-content{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    position: fixed;
+    z-index: 1111;
+    background: #fff;
+    box-shadow: 0px 0px 5px 1px darkgray;
+    width: 90%;
+    border-radius: .5rem;
+    padding: 15px;
+}
+.backoffice .header-content a.back{
+    width: 180px;
+    margin-right: 100px;
+}
+.backoffice .dropmenu-content a{
+    text-decoration: none;
+    color: gray;
+}
+.backoffice .dropmenu-content a:hover{
+    text-decoration: underline;
+    color: #0d6efd;
+}
+.backoffice .dropmenu-content{
+    position:  absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: 280px;
+    max-width: 310px;
+    height: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    z-index: 111;
+    opacity: 0;
+    transition: all 700ms ease-in-out;
+    padding: 15px;
+    gap: 10px;
+    pointer-events: none;
+}
+.openSubNav{
+    opacity: 1 !important;
+    height: max-content !important;
+    pointer-events: auto !important;
+}
+.backoffice header nav{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.backoffice header nav .link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px 10px;
+    color:gray;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+}
+.backoffice header nav .link.active{
+    background-color: aliceblue;
+    color:#2175FF;
+}
+.backoffice header nav .link i{
+    margin: 0 10px 0 0;
+    color: yellowgreen;
+}
+
+.backoffice .content{
+    width: 75%;
+    margin: 30px auto;
+    min-width: 290px;
+    margin: 110px auto 30px;
+}
+a.back{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border: 1px solid yellowgreen;
+    padding: 10px 0;
+    justify-content: center;
+    width: 20%;
+    border-radius: 5px;
+    color: yellowgreen;
+}
+a.back i{
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: yellowgreen;
+}
+.categ .categ-content,.product-content{
+    margin-top: 110px;
+}
+/*success*/
+.new-message-box-success {
+    background: #eeeeee;
+    padding: 3px;
+    margin: 10px 0;
+}
+
+.tip-icon-success {
+    background: #8BC34A;
+}
+
+.tip-box-success {
+    color: #33691E;
+    background: #DCEDC8;
+}
+
+.tip-icon-success i:last-child:before {
+    background: #8BC34A;
+}
+
+/*error*/
+.new-message-box-danger {
+    background: #eeeeee;
+    padding: 3px;
+    margin: 10px 0;
+}
+
+.tip-icon-danger {
+    background: #f44336;
+}
+
+.tip-box-danger {
+    color: #b71c1c;
+    background: #FFCCBC;
+}
+
+.tip-icon-danger i:last-child:before {
+    background: #f44336;
+}
+/*info*/
+.new-message-box-info {
+    background: #eeeeee;
+    padding: 3px;
+    margin: 10px 0;
+}
+
+.tip-box-info {
+    color: #01579B;
+    background: #B3E5FC;
+}
+
+.tip-icon-info {
+    background: #03A9F4;
+}
+
+.new-message-box .fas {
+    font-size: 19px;
+    top: 15px;
+    left: 16px;
+    position: absolute;
+    color: white;
+}
+
+

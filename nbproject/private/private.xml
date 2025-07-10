@@ -6,14 +6,21 @@
             <file>file:/C:/xampp/htdocs/Kebab78/inc/init.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/categorie/index.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/index.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/client/index.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/style/style.css</file>
-            <file>file:/C:/xampp/htdocs/Kebab78/inc/controls.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/inc/footer.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/js/client.js</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/inc/remove_from_cart.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/extrat/index.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/inc/functions.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/inc/header.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/product/index.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/inc/update_cart.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/confirmation/index.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/inc/controls.php</file>
+            <file>file:/C:/xampp/htdocs/Kebab78/admin/index.php</file>
             <file>file:/C:/xampp/htdocs/Kebab78/js/main.js</file>
             <file>file:/C:/xampp/htdocs/Kebab78/cart/index.php</file>
-            <file>file:/C:/xampp/htdocs/Kebab78/product/index.php</file>
         </group>
     </open-files>
 </project-private>
