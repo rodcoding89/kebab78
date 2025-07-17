@@ -10,6 +10,8 @@
 		// Supposons que $resultats soit un tableau contenant les résultats et $categories soit un tableau contenant les catégories
         $resultats = $result->fetchAll(PDO::FETCH_ASSOC);
         $categories = $categ->fetchAll(PDO::FETCH_ASSOC);
+        //debug($resultats);
+        //debug($categories);
 		foreach ($resultats as $resultat) {
 		    $table .= '<tr>';
 		    $table .= '<td>' . htmlspecialchars($resultat['extrat_name']) . '</td>';

@@ -22,38 +22,34 @@
 	$option .= '</select></div>';
 	require_once '../../nav.php';
 ?>
-<div id="edit-extrat" class="product-content">
-	<h3 class="mb-4">Modifier le produit</h3>
+<div id="edit-extrat" class="product-content setting-extrat">
+	<h3 class="mb-4">Modifier la catégorie</h3>
+	<form action="" method="post" enctype="multipart/form-data">
+	    <input type="hidden" id="sid" value="<?php echo htmlspecialchars($resultat['extrat_id']); ?>">
+	    <div class="form-floating mb-3">
+	        <input type="text" value="<?php echo htmlspecialchars($resultat['extrat_name']); ?>" class="form-control" id="s-name" placeholder="Nom du supplément">
+	        <label for="s-name">Nom du supplément</label>
+	    </div>
+	    <div class="form-floating mb-3">
+	        <input type="text" class="form-control" value="<?php echo htmlspecialchars($resultat['extrat_categ']); ?>" id="categ-s" placeholder="Légume, Poulet, ...">
+	        <label for="categ-s">Donnez une catégorie au supplément</label>
+	    </div>
+	    <?php echo $option; ?>
+	    <div class="form-floating mb-3">
+	        <input type="text" value="<?php echo htmlspecialchars($resultat['prix']); ?>" class="form-control" id="s-prix" placeholder="10.85">
+	        <label for="s-prix">Prix du supplément (facultatif)</label>
+	    </div>
+	    <div class="mb-3">
+	        <label for="formFileEditExtrat" class="form-label">Choisir une image de remplacement (facultative)</label>
+	        <input class="form-control" type="file" id="formFileEditExtrat" accept="image/*" name="file">
+	        <input type="hidden" class="img-url" value="<?php echo htmlspecialchars($resultat['img_url']); ?>"/>
+	        <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($resultat['img_url']); ?>">
+	    </div>
+	    <div class="submit mb-3">
+	        <button type="submit" class="btn btn-primary w-100 mt-4 py-10 s-setting" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier ce supplément</button>
+	    </div>
+	</form>
 
-	<div class="setting-extrat">
-		
-		<form action="" method="post" enctype="multipart/form-data">
-		    <input type="hidden" id="sid" value="<?php echo htmlspecialchars($resultat['extrat_id']); ?>">
-		    <div class="form-floating mb-3">
-		        <input type="text" value="<?php echo htmlspecialchars($resultat['extrat_name']); ?>" class="form-control" id="s-name" placeholder="Nom du supplément">
-		        <label for="s-name">Nom du supplément</label>
-		    </div>
-		    <div class="form-floating mb-3">
-		        <input type="text" class="form-control" value="<?php echo htmlspecialchars($resultat['extrat_categ']); ?>" id="categ-s" placeholder="Légume, Poulet, ...">
-		        <label for="categ-s">Donnez une catégorie au supplément</label>
-		    </div>
-		    <?php echo $option; ?>
-		    <div class="form-floating mb-3">
-		        <input type="text" value="<?php echo htmlspecialchars($resultat['prix']); ?>" class="form-control" id="s-prix" placeholder="10.85">
-		        <label for="s-prix">Prix du supplément (facultatif)</label>
-		    </div>
-		    <div class="mb-3">
-		        <label for="formFile" class="form-label">Choisir une image de remplacement (facultative)</label>
-		        <input class="form-control" type="file" id="formFile" accept="image/*" name="file">
-		        <input type="hidden" class="img-url" value="<?php echo htmlspecialchars($resultat['img_url']); ?>"/>
-		        <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($resultat['img_url']); ?>">
-		    </div>
-		    <div class="submit mb-3">
-		        <button type="submit" class="btn btn-primary w-100 mt-4 py-10 s-setting" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier ce supplément</button>
-		    </div>
-		</form>
-
-	</div>
 </div>
 <?php 
     require_once '../../footer.php';

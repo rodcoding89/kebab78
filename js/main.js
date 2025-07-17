@@ -56,7 +56,7 @@ window.addEventListener('load',() =>{
             title.style['transform'] = "translateY(0)";
 
             item.forEach(el => {
-                el.style['opacity'] = 1;
+                /*el.style['opacity'] = 1;*/
                 el.style['visibility'] = 'visible';
                 el.style['transform'] = "translateY(10+'px')";
                 el.style['transform'] = "translateY(0)";
@@ -83,23 +83,21 @@ window.addEventListener('load',() =>{
     if(typeof(categorie) != 'undefined' && categorie != null){
         //alert(categorie);
         let currentUrl = window.location.href;
-        let commandeType = currentUrl.toString().split('?')[1];
+        let commandeType = currentUrl.toString().split('=')[1];
         $(function(){
             $.post(RACINE+'inc/controls.php',{postType:'getCategorie'},(res) => {
                 console.log(res);
-                setTimeout(() => {
-                    if(res.resultat){
-                        let content = `<div class="categ-content"><div class="bloc-content">`;
-                        res.resultat.map(el =>{
-                            content += `<a class="item-link" href="${RACINE}product?access=${el.categorie_id}&delivery=${commandeType}"><div class="item" style="background-image:url(${RACINE+el.img_url})"><img src="${RACINE+el.img_url}" alt="${el.categorie_name}" style="display:none"><div class="text"></div></div><h4><i class="fas fa-plus"></i>${el.categorie_name.toUpperCase()}</h4></a>`;
-                        });
-                        content += '</div></div>';
-                        $('main .categ').append(content);
-                        $('.categ .bloc-content').addClass('in');
-                    }else if(res.emptyTable){
-                        $('main .categ').append(`<div class="new-message-box"><div class="new-message-box-info"><div class="info-tab tip-icon-info" title="info"><i class="fas fa-info"></i><i></i></div><div class="tip-box-info"><p>${res.emptyTable}</p></div></div></div>`);
-                    }
-                },2000);
+                if(res.resultat){
+                    let content = `<div class="categ-content"><div class="bloc-content">`;
+                    res.resultat.map(el =>{
+                        content += `<a class="item-link" href="${RACINE}product?access=${el.categorie_id}&delivery=${commandeType}"><div class="item" style="background-image:url(${RACINE+el.img_url})"><img src="${RACINE+el.img_url}" alt="${el.categorie_name}" style="display:none"><div class="text"></div></div><h4><i class="fas fa-plus"></i>${el.categorie_name.toUpperCase()}</h4></a>`;
+                    });
+                    content += '</div></div>';
+                    $('main .categ').append(content);
+                    $('.categ .bloc-content').addClass('in');
+                }else if(res.emptyTable){
+                    $('main .categ').append(`<div class="new-message-box"><div class="new-message-box-info"><div class="info-tab tip-icon-info" title="info"><i class="fas fa-info"></i><i></i></div><div class="tip-box-info"><p>${res.emptyTable}</p></div></div></div>`);
+                }
             },'json')
         });
     }
@@ -193,126 +191,55 @@ window.addEventListener('load',() =>{
                 const productName = document.getElementById("productName").value;
                 let inputCheckCount = 0;
                 let canMakeAction = false;
-                $('body main .extrat .elm-content .active.show .bloc-item .card').each(function(index){
-                    const input = $(this).find('.card-body input');
-                    if(input){
-                        const check = input.is(':checked');
-                        console.log("input",input,"check",check);
-                        if(check === true){
-                            inputCheckCount += 1;
+                
+                if($('body main .extrat .elm-content .active.show').length){
+                    $('body main .extrat .elm-content .active.show .bloc-item .card').each(function(index){
+                        const input = $(this).find('.card-body input');
+                        if(input){
+                            const check = input.is(':checked');
+                            console.log("input",input,"check",check);
+                            if(check === true){
+                                inputCheckCount += 1;
+                            }
                         }
-                    }
-                });
-                if(inputCheckCount > 0){
-                    const vCount = productName.split(" ")[0];
-                    if(productName.includes('viande')){
-                        if(inputCheckCount === parseInt(vCount)){
-                            canMakeAction = true;
-                        }else{
-                            $('.bloc-item').prepend('<div class="error" style="color:darkred;font-size:14px;margin-bottom:10px;">Vous pouvez choisir uniquement '+vCount+' viande.</div>');
-                            setTimeout(()=>{
-                                $('.bloc-item .error').remove();
-                            },3500);
-                        }
-                    }else{
-                        if(productName.includes('Sandwich')){
-                            if(inputCheckCount === 1){
+                    });
+                    if(inputCheckCount > 0){
+                        if(productName.toLowerCase().includes('viande') || productName.toLowerCase().includes('formule tacos')){
+                            let position = productName.search(/\d/);
+                            const vCount = productName[position];
+                            if(inputCheckCount === parseInt(vCount)){
                                 canMakeAction = true;
                             }else{
-                                $('.bloc-item').prepend('<div class="error" style="color:darkred;font-size:14px;margin-bottom:10px;">Vous pouvez choisir uniquement 1 viande.</div>');
+                                $('.bloc-item').prepend('<div class="error" style="color:darkred;font-size:14px;margin-bottom:10px;">Vous pouvez choisir uniquement '+vCount+' viande.</div>');
                                 setTimeout(()=>{
                                     $('.bloc-item .error').remove();
                                 },3500);
                             }
                         }else{
-                            canMakeAction = true;
-                        }
-                    }
-                    if(canMakeAction === true){
-                        const salade = document.getElementById("salades");
-                        const tomate = document.getElementById("tomates");
-                        const oignon = document.getElementById("oignons");
-                        const sauceB = document.getElementById("sauce-barbequie");
-                        const mayonaise = document.getElementById("moyonaise");
-                        const ketchop = document.getElementById("sauce-ketchop");
-                        const sauceBlanche = document.getElementById("sauce-blanche");
-                        const thon = document.getElementById("thon");
-                        const poulet = document.getElementById("poulet");
-                        const steak = document.getElementById("steak");
-                        const socisse = document.getElementById("socisse");
-                        const kefta = document.getElementById("kefta");
-                        const socisseCury = document.getElementById("socisse-au-curry");
-                        const bouletteViande = document.getElementById("boulette-de-viande");
-                        const thonPrice = document.getElementById("thon-price");
-                        const pouletPrice = document.getElementById("poulet-price");
-                        const steakPrice = document.getElementById("steak-price");
-                        const socissePrice = document.getElementById("socisse-price");
-                        const keftaPrice = document.getElementById("kefta-price");
-                        const socisseCuryPrice = document.getElementById("socisse-au-curry-price");
-                        const bouletteViandePrice = document.getElementById("boulette-de-viande-price");
-                        const productId = document.getElementById("productId").value;
-                        const deliveryMode = document.getElementById("deliveryMode").value;
-                        const cid = document.getElementById("catId").value;
-                        const product = {
-                            productName:productName,
-                            productPrice:document.getElementById("productPrice").value,
-                            productImg:document.getElementById("productImg").value,
-                            productId:document.getElementById("productId").value,
-                            deliveryMode:document.getElementById("deliveryMode").value,
-                            cid:document.getElementById("catId").value,
-                            extract:[
-                                {
-                                    oignon:oignon ? oignon.checked : false,
-                                    tomate:tomate ? tomate.checked : false,
-                                    salade:salade ? salade.checked : false
-                                },
-                                {
-                                    sauceBarbequie:sauceB ? sauceB.checked : false,
-                                    sauceBlanche:sauceBlanche ? sauceBlanche.checked : false,
-                                    ketchop:ketchop ? ketchop.checked : false,
-                                    mayonaise:mayonaise ? mayonaise.checked : false
-                                },
-                                {
-                                    poulet:poulet ? poulet.checked : false,
-                                    steak:steak ? steak.checked : false,
-                                    socisse:socisse ? socisse.checked : false,
-                                    kefta:kefta ? kefta.checked : false,
-                                    socisseCurry:socisseCury ? socisseCury.checked : false,
-                                    bouletViande:bouletteViande ? bouletteViande.checked : false
-                                },
-                                {
-                                    thon:{check:thon ? thon.checked : false,price:thonPrice ? thonPrice.value : 0}
-                                },
-                                {},
-                                {}
-                            ]
-                        };
-                        console.log("product",product);
-                        const data = {
-                            postType:"addCart",
-                            product:product
-                        };
-                        $.post(RACINE + 'inc/controls.php', data, (res) => {
-                            if (res.result === 'product_added') {
-                                // Traitez ici la réponse réussie, par exemple :
-                                console.log("res",res);
-                                window.location.href = RACINE+'product?access='+cid+'&delivery='+deliveryMode;
-                                //console.log("cartCount",cartCount);
-                                // Mettez à jour l'interface utilisateur si nécessaire
-                            } else {
-                                alert("Erreur lors de l'ajout du produit");
+                            if(productName.toLowerCase().includes('sandwich')){
+                                if(inputCheckCount === 1){
+                                    canMakeAction = true;
+                                }else{
+                                    $('.bloc-item').prepend('<div class="error" style="color:darkred;font-size:14px;margin-bottom:10px;">Vous pouvez choisir uniquement 1 viande.</div>');
+                                    setTimeout(()=>{
+                                        $('.bloc-item .error').remove();
+                                    },3500);
+                                }
+                            }else{
+                                canMakeAction = true;
                             }
-                        }, 'json')
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                            console.error("Erreur lors de la requête AJAX :", textStatus, errorThrown);
-                            alert("Erreur lors de la requête AJAX. Veuillez consulter la console pour plus de détails.");
-                        });
+                        }
+                        if(canMakeAction === true){
+                            addCart(productName);
+                        }
+                    }else{
+                        $('.bloc-item').prepend('<div class="error" style="color:darkred;font-size:14px;margin-bottom:10px;">Veuillez cocher parmis les champs.</div>');
+                        setTimeout(()=>{
+                            $('.bloc-item .error').remove();
+                        },3500);
                     }
                 }else{
-                    $('.bloc-item').prepend('<div class="error" style="color:darkred;font-size:14px;margin-bottom:10px;">Veuillez cocher parmis les champs.</div>');
-                    setTimeout(()=>{
-                        $('.bloc-item .error').remove();
-                    },3500);
+                    addCart(productName);
                 }
             });
             
@@ -332,6 +259,63 @@ window.addEventListener('load',() =>{
         });
     }
 });
+
+function addCart(productName){
+    const extrat = {};
+    $(".elm-content .bloc.active").each((i, el) => {
+        const extratCateg = $(el).find('.extratCateg').val();
+
+        // Initialisez un tableau vide pour chaque catégorie
+        extrat[extratCateg] = [];
+
+        $(el).find('.card').each((index, card) => {
+            const checkInput = $(card).find('input[type="checkbox"]').prop('checked');
+            const extratName = $(card).find('.extratName').val();
+
+            // Ajoutez un nouvel objet au tableau de la catégorie
+            extrat[extratCateg].push({
+                name: extratName,
+                check: checkInput
+            });
+        });
+
+        console.log("extrat inside", extrat);
+    });
+    console.log("extrat outside",extrat);
+
+    const productId = document.getElementById("productId").value;
+    const deliveryMode = document.getElementById("deliveryMode").value;
+    const cid = document.getElementById("catId").value;
+    const product = {
+        productName:productName,
+        productPrice:document.getElementById("productPrice").value,
+        productImg:document.getElementById("productImg").value,
+        productId:document.getElementById("productId").value,
+        deliveryMode:document.getElementById("deliveryMode").value,
+        cid:document.getElementById("catId").value,
+        extract:extrat
+    };
+    console.log("product",product);
+    const data = {
+        postType:"addCart",
+        product:product
+    };
+    $.post(RACINE + 'inc/controls.php', data, (res) => {
+        if (res.result === 'product_added') {
+            // Traitez ici la réponse réussie, par exemple :
+            console.log("res",res);
+            window.location.href = RACINE+'categorie?delivery='+deliveryMode;
+            //console.log("cartCount",cartCount);
+            // Mettez à jour l'interface utilisateur si nécessaire
+        } else {
+            alert("Erreur lors de l'ajout du produit");
+        }
+    }, 'json')
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        console.error("Erreur lors de la requête AJAX :", textStatus, errorThrown);
+        alert("Erreur lors de la requête AJAX. Veuillez consulter la console pour plus de détails.");
+    });
+}
 function openCart(){
     window.location.href = RACINE+'cart';
 }

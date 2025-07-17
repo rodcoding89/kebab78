@@ -125,8 +125,13 @@ h6{
 /*****************************HEADER*****************************************/
 header{
     display: flex;
-    justify-content: flex-end;
-    position: relative;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding: 35px 20px 20px;
+    min-width: 280px;
+    max-width: 750px;
+    margin: 0 auto;
 }
 /*success*/
 .new-message-box-success {
@@ -301,10 +306,8 @@ body .input-group-text{
 /***************************CART******************************/
 .cart-icon {
     width: max-content;
-    position: absolute;
-    top: 28px;
+    position: relative;
     height: auto;
-    right: 35px;
     cursor: pointer;
 }
 .cart-icon i{
@@ -484,20 +487,21 @@ body .input-group-text{
 }
 
 .checkout-btn {
-    width: max-content;
-    padding: 12px;
-    background-color: var(--primary);
+    width: max-content !important;
+    padding: 12px !important;
+    background-color: var(--primary) !important;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 16px !important;
     margin-top: 15px;
     transition: background-color 0.3s;
 }
 
 .checkout-btn:hover {
-    background-color: #3a56d4;
+    background-color: #545a75 !important;
+    color: white !important;
 }
 
 .overlay {
@@ -519,8 +523,10 @@ body .input-group-text{
 }
 /************************CONFIMATION************************************/
 .confirmation-container {
-    max-width: 800px;
+    max-width: 1110px;
     margin: 50px auto;
+    min-width: 280px;
+    width: 100%;
 }
 .confirmation-card {
     border-radius: 10px;
@@ -553,7 +559,7 @@ body .input-group-text{
     margin-bottom: 20px;
 }
 .card-header {
-    background-color: #0d6efd;
+    background-color: #545a75;
     color: white;
     border-radius: 10px 10px 0 0 !important;
 }
@@ -591,13 +597,16 @@ body .input-group-text{
 
 /*categorie page styling*/
 .categ,.products,.extrat{
-    width: 80%;
-    margin: 50px auto;
+    width: 100%;
+    padding: 20px;
+    min-width: 280px;
+    max-width: 1020px;
+    margin: 10px auto;
 }
 .categ .bloc-content,.products .bloc-content{
     position: relative;
     display:flex;
-    justify-content:flex-start;
+    justify-content:center;
     width: 100%;
     align-items: center;
     flex-wrap: wrap;
@@ -758,4 +767,24 @@ body .input-group-text{
     font-size: 1.2em;
     color: lightcoral;
     margin-right: 10px;
+}
+#map {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+.filter{
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    border-radius: 0.3rem;
+}
+.filter div{
+    cursor: pointer;
 }

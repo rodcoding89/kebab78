@@ -19,26 +19,35 @@
                 ':cid' => $cid
             ));
         }
+        $categ = selectQuery("SELECT categorie_name FROM categorie WHERE categorie_id =:cid",array(
+            ":cid" => $cid
+        ));
+        $categResult = $categ->fetch(PDO::FETCH_ASSOC);
         
-        $content ='<div class="product-content"><div class="bloc-content in">';
-        while ($product = $result->fetch(PDO::FETCH_ASSOC)) {
-            $prix = 0;
-            if (isset($product['prix_avec_livraison'])) {
-                $prix = '<span class="prix">'.$product['prix_avec_livraison'].'€</span>';
-            } else {
-                $prix = '<span class="prix">'.$product['prix_sans_livraison'].'€</span>';
+        $products = $result->fetchAll(PDO::FETCH_ASSOC);
+        if (count($products) > 0) {
+            $content ='<div class="product-content"><h2 style="text-align:center;margin-bottom:20px;">'.ucfirst($categResult['categorie_name']).'</h2><div class="bloc-content in">';
+            foreach ($products as $product) {
+                $prix = 0;
+                if (isset($product['prix_avec_livraison'])) {
+                    $prix = '<span class="prix">'.$product['prix_avec_livraison'].'€</span>';
+                } else {
+                    $prix = '<span class="prix">'.$product['prix_sans_livraison'].'€</span>';
+                }
+                
+                $content .= '<a href="'.RACINE.'extrat?p='.$product['product_id'].'&c='.$product['categorie'].'&delivery='.$deliveryMode.'"><div class="card h-100">';
+                $content .='<img src="'.RACINE.$product['img_url'].'" class="card-img-top" alt="'.$product['product_name'].'">';
+                $content .= '<div class="card-body"><h5 class="card-title">'.$product['product_name'].'</h5><p class="card-text">'.$product['description'].'</p>'.$prix.'</div>';
+                $content .= '</div></a>';
             }
-            
-            $content .= '<a href="'.RACINE.'extrat?p='.$product['product_id'].'&c='.$product['categorie'].'&delivery='.$deliveryMode.'"><div class="card h-100">';
-            $content .='<img src="'.RACINE.$product['img_url'].'" class="card-img-top" alt="'.$product['product_name'].'">';
-            $content .= '<div class="card-body"><h5 class="card-title">'.$product['product_name'].'</h5><p class="card-text">'.$product['description'].'</p>'.$prix.'</div>';
-            $content .= '</div></a>';
+            $content .='</div></div>';
+        }else{
+            $content = "<div style='min-height:250px;width:100%;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:bold;'>Aucun produit correspondant à cette catégorie n'est enregistré pour le moment.</div>";
         }
-        $content .='</div></div>';
     }
 ?>
 
-<div class="products"><a href="<?php echo RACINE.'categorie?'.$deliveryMode?>" class="back"><i class="fas fa-hand-point-left"></i> Retour</a><?php echo $content ?></div>
+<div class="products"><?php echo $content ?></div>
 
 <?php
     include_once '../inc/footer.php';

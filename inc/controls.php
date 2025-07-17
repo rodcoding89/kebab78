@@ -315,6 +315,17 @@ if (isset($_POST)) {
             $res['sqlError'] = "Une erreur s'est produite. Veuillez réessayer plus tard";
         }
         echo json_encode($res);
+    } elseif($_POST['postType'] == 'filterClient'){
+        $searchTerm = '%'.$_POST['searchTerm'].'%';
+        $result = selectQuery("SELECT * FROM client WHERE first_name LIKE :term OR last_name LIKE :term",array(
+            "term"=>$searchTerm
+        ));
+        if ($result->rowCount() > 0) {
+            $res['client'] = $result->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $res['noclient'] = null;
+        }
+        echo json_encode($res);
     } elseif($_POST['postType'] == 'addCart'){
         $product = $_POST['product'];
         $productId = $product['productId'];
@@ -330,7 +341,8 @@ if (isset($_POST)) {
                 'price' => $product['productPrice'],
                 'image' => $product['productImg'],
                 'quantity' => 1,
-                'extract'=>$product['extract']
+                'extract'=>isset($product['extract']) ? $product['extract'] : null,
+                'deliveryMode'=>$product['deliveryMode']
             ];
             $_SESSION['id'] = $productId;
             $_SESSION['mode'] = $product['deliveryMode'];

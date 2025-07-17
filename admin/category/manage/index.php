@@ -17,8 +17,8 @@
 	            <label for="c-name">Modifier le nom de votre nouveau type de produit</label>
 	        </div>
 	        <div class="mb-3">
-	            <label for="formFile" class="form-label">Modifier l'image de la catégorie</label>
-	            <input class="form-control" type="file" id="formFile" accept="image/*" name="file">
+	            <label for="formFileEditCateg" class="form-label">Modifier l'image de la catégorie</label>
+	            <input class="form-control" type="file" id="formFileEditCateg" accept="image/*" name="file">
 	            <input type="hidden" class="img-url" value="<?php echo htmlspecialchars($resultat['img_url']); ?>">
 	            <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($resultat['img_url']); ?>">
 	        </div>

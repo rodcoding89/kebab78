@@ -12,53 +12,31 @@ if(!isOn()){
 }
 $title = "Découvrez nos catégorie";
 include_once '../inc/header.php';
-$productExtrat = array();
+
 function filterArrayWithoutPrice($item){
-    return $item == 'true' ? true : false;
+    //var_dump($item['check']);
+    return $item['check'] == 'true' ? true : false;
 }
+
+//debug($_SESSION['cart']);
+
 function handleExtrat($productId){
     $extratPrice = 0;
     global $productExtrat;
     if($_SESSION['cart'][$productId]){
         $extrat = $_SESSION['cart'][$productId]['extract'];
         $response = [];
-        for($i = 0; $i < count($extrat); $i++){
-            $item = $extrat[$i];
-            if($i == 0 || $i == 1){
-                $result = array_filter($item, "filterArrayWithoutPrice");
-                //var_dump($result);
-                $keys = array_keys($result);
-                //var_dump($keys);
-                $compo = implode(", ", $keys);
-                //var_dump($compo);
-                if(count($keys) > 0){
-                    if($i == 0){
-                        $response[$i] = 'Compsition : '.$compo;
-                    }else{
-                        $response[$i] = 'Sauce : '.$compo;
-                    }
-                }
-            }else if($i == 2 || $i == 3){
-                $extratKey = [];
-                foreach ($item as $key => $value) {
-                    if($value['check'] == 'true'){
-                        //var_dump($value);
-                        $price = floatval($value['price']);
-                        $extratPrice += $price;
-                        array_push($extratKey,$key);
-                    }
-                }
-                $extratAdded = implode(", ", $extratKey);
-                if(count($extratKey) > 0){
-                    if($i == 2){
-                        $response[$i] = 'Viande : '.$extratAdded;
-                    }else{
-                        $response[$i] = 'Poison : '.$extratAdded;
-                    }
-                }
+        if ($extrat != null) {
+            foreach ($extrat as $key => $value) {
+                //debug($value);
+                $result = array_filter($value, "filterArrayWithoutPrice");
+                $item = array_column($result, 'name');
+                //var_dump($item);
+                $name = implode(", ", $item);
+                array_push($response, ucfirst($key).' - '.$name);
             }
         }
-        array_push($productExtrat,$extratPrice);
+        array_push($response,"Mode de reception - ".$_SESSION['cart'][$productId]['deliveryMode']);
         return $response;
     }
 }
@@ -71,7 +49,7 @@ function handleExtrat($productId){
         <div class="cart-modal" id="cartModal">
             <div class="cart-header">
                 <h2>Votre Panier</h2>
-                <a class="movebtn" href="<?php echo RACINE.'product?access='.$_SESSION['cid'].'&delivery='.$_SESSION['mode']?>">
+                <a class="movebtn" href="<?php echo isset($_SESSION['mode']) && isset($_SESSION['cid']) ? RACINE.'product?access='.$_SESSION['cid'].'&delivery='.$_SESSION['mode'] : RACINE; ?>">
                     <i class="fas fa-times"></i>FERMER
                 </a>
             </div>
@@ -114,32 +92,33 @@ function handleExtrat($productId){
             <?php 
                 $total = 0;
                 $subtotal = 0;
-                $extract = 0;
                 $index = 0;
+
                 foreach ($_SESSION['cart'] as $item){
-                    $extratPrice = $productExtrat[$index];
-                    $extract = $extratPrice * $item['quantity'];
                     $subtotal += $item['price'] * $item['quantity'];
                     $index++;
                 }
-                $total = $subtotal + $extract;
+                $tva = $subtotal * 0.10;
+                $total = $subtotal + $tva;
             ?>
             <div class="cart-summary">
                 <div class="summary-sec">
                     <div class="cart-total">
-                        <span>Extrat:</span>
-                        <em> <?php echo number_format($extract, 2); ?> €</em>
+                        <span>Sous Total:</span>
+                        <em> <?php echo number_format($subtotal, 2); ?> €</em>
                     </div>
                     <div class="cart-total">
-                        <span>Produit:</span>
-                        <em> <?php echo number_format($subtotal, 2); ?> €</em>
+                        <span>TVA: 10%</span>
+                        <em> <?php echo number_format($tva, 2); ?> €</em>
                     </div>
                     <div class="cart-total">
                         <span>Total:</span>
                         <em> <?php echo number_format($total, 2); ?> €</em>
                     </div>
                 </div>
-                <a href="<?php echo RACINE.'client'; ?>" class="checkout-btn">Passer la commande</a>
+                <form action="<?php echo RACINE . 'inc/order_from_cart.php' ?>" method="post">
+                    <button type="submit" class="checkout-btn">Passer la commande</button>
+                </form>
             <?php endif; ?>
     </div>
 </div>

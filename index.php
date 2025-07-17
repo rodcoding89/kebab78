@@ -71,14 +71,14 @@
             <div class="commande-mode">
                 <h2>Choisissez votre mode de commande</h2>
                 <div class="content">
-                    <div class="surplace item">
-                        <a href="categorie?surplace">
+                    <div class="surplace item" style="<?php echo !isset($_SESSION['mode']) ? 'pointer-events:auto; opacity:1' : ($_SESSION['mode'] == 'surplace' ? 'pointer-events:auto; opacity:1' : 'pointer-events:none; opacity:0.5'); ?>">
+                        <a href="categorie?delivery=surplace">
                             <i class="fas fa-utensils"></i>
                             <h4>Sur place</h4>
                         </a>
                     </div>
-                    <div class="emporter item">
-                        <a href="categorie?livraison">
+                    <div class="emporter item" style="<?php echo !isset($_SESSION['mode']) ? 'pointer-events:auto; opacity:1' : ($_SESSION['mode'] == 'livraison' ? 'pointer-events:auto; opacity:1' : 'pointer-events:none; opacity:0.5'); ?>">
+                        <a href="categorie?delivery=livraison">
                             <i></i>
                             <h4>Livraison</h4>
                         </a>

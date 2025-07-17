@@ -15,21 +15,18 @@
         }
     }
     /**this function run select sql request.It give also back true if the request was successfuly executed or false if it meet a error  */
-    function selectQuery($query,$marqueur = array()){
-        foreach ($marqueur as $key => $value) {
-            $marqueur[$key] = htmlspecialchars($value,ENT_QUOTES);
-        }
-
+    function selectQuery($query, $marqueur = array()) {
         global $pdo;
 
-        $resultat = $pdo->prepare($query);
-        $success = $resultat->execute($marqueur);
-        if ($success) {
+        try {
+            $resultat = $pdo->prepare($query);
+            $resultat->execute($marqueur);
             return $resultat;
-        }else {
-            die('Erreur produit lors de l\'execution de la requête');
+        } catch (PDOException $e) {
+            die('Erreur lors de l\'exécution de la requête : ' . $e->getMessage());
         }
     }
+
     /**this function run sql request like insert,delete,update. It give also back true if the request was successfuly executed or false if it meet a error */
     function actionQuery($query,$marqueur = array()){
         foreach ($marqueur as $key => $value) {

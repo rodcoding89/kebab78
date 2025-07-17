@@ -47,8 +47,6 @@ INSERT INTO `categorie` (`categorie_id`, `categorie_name`, `img_url`) VALUES
 (7, 'formules tacos', 'assets/images/product-images/6149d06c0a53a_cuisse_grille.jpg'),
 (8, 'formules sandwichs', 'assets/images/product-images/6149cf2cc6140_cuisse_grille.jpg'),
 (9, 'formules burgers', 'assets/images/product-images/6149cefd3613b_cuisse_grille.jpg'),
-(10, 'test2', 'assets/images/product-images/6149cda8409f0_riz_thai_poulet_450.png'),
-(12, 'test3', 'assets/images/product-images/6149bd83d3ea4_cuisse_grille.jpg');
 
 -- --------------------------------------------------------
 
@@ -90,7 +88,7 @@ INSERT INTO `extrat` (`extrat_id`, `extrat_name`, `extrat_categ`, `prix`, `img_u
 --
 
 CREATE TABLE `product` (
-  `product_id` bigint(20) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `categorie` int(11) DEFAULT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `description` text NOT NULL,
@@ -119,7 +117,7 @@ INSERT INTO `product` (`product_id`, `categorie`, `product_name`, `description`,
 --
 
 CREATE TABLE `user` (
-  `user_id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `identifiant` varchar(255) DEFAULT NULL,
   `mdp` text NOT NULL,
   `statut` enum('user','admin') NOT NULL
@@ -136,6 +134,34 @@ INSERT INTO `user` (`user_id`, `identifiant`, `mdp`, `statut`) VALUES
 --
 -- Index pour les tables déchargées
 --
+CREATE TABLE `client` (
+  `client_id` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `tel` varchar(20) NOT NULL,
+  `street` varchar(355) NOT NULL,
+  `postal_code` varchar(10) NOT NULL,
+  `city` varchar(155) NOT NULL,
+  `country` varchar(155) NOT NULL,
+  `lat` varchar(255) NOT NULL,
+  `lon` varchar(255) NOT NULL,
+);
+
+CREATE TABLE `orders` (
+  `orders_id` int(11) NOT NULL,
+  `orders_ref` varchar(55) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `orders_date` date NOT NULL,
+  `total_amount` double NOT NULL,
+  `orders_content` JSON NOT NULL,
+  `order_status` enum('pending','shipped','delivered','cancelled')
+);
+
+CREATE TABLE `orders_product` (
+  `orders_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+);
 
 --
 -- Index pour la table `categorie`
@@ -163,6 +189,12 @@ ALTER TABLE `product`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`client_id`);
+
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`orders_id`);
+
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
@@ -171,25 +203,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `categorie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `categorie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT pour la table `extrat`
 --
 ALTER TABLE `extrat`
-  MODIFY `extrat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `extrat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `client`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `orders`
+  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Contraintes pour les tables déchargées
@@ -206,6 +244,15 @@ ALTER TABLE `extrat`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `FK_categ` FOREIGN KEY (`categorie`) REFERENCES `categorie` (`categorie_id`) ON DELETE CASCADE;
+
+ALTER TABLE `orders`
+  ADD CONSTRAINT `FK_orders_client` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE;
+
+ALTER TABLE `orders_product`
+  ADD CONSTRAINT `FK_orders_orders` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`orders_id`) ON DELETE CASCADE;
+
+ALTER TABLE `orders_product`
+  ADD CONSTRAINT `FK_orders_product_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE;  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

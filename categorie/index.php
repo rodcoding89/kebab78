@@ -8,7 +8,7 @@
     include_once '../inc/header.php';
 ?>
 
-<div class="categ"><a href="<?php echo RACINE?>" class="back"><i class="fas fa-hand-point-left"></i> Retour</a></div>
+<div class="categ"></div>
 
 <?php
     include_once '../inc/footer.php';

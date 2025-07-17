@@ -1,4 +1,5 @@
 <?php 
+	require_once dirname(dirname(dirname(__DIR__))).'/inc/init.php';
 	$productId = $_GET['productId'];
     
 	$resultat = selectQuery("SELECT * FROM product WHERE product_id =:productId",array(
@@ -22,7 +23,7 @@
 	$option .= '</select></div>';
 	require_once '../../nav.php';
 ?>
-<div id="edit" class="product-content">
+<div id="edit-product" class="product-content">
 	<h3 class="mb-4">Modifier le produit</h3>
 	<div class="setting-product">
 		
@@ -47,8 +48,8 @@
 		    </div>
 		    <div class="mb-3">
 		        <div>
-		        	<label for="formFile" class="form-label">Choisir une image pour le produit</label>
-			        <input class="form-control" type="file" id="formFile" accept="image/*" name="file">
+		        	<label for="formFileEditProduct" class="form-label">Choisir une image pour le produit</label>
+			        <input class="form-control" type="file" id="formFileEditProduct" accept="image/*" name="file">
 			        <input type="hidden" value="<?php echo htmlspecialchars($productItem['img_url']); ?>" id="img-url">
 		        </div>
 		        <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($productItem['img_url']); ?>">

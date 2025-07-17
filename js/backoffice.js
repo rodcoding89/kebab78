@@ -10,7 +10,7 @@ const segment = newUrl.pathname.split('/');
 const client = document.getElementById("clients");
 const commande = document.getElementById("commandes");
 const product = document.getElementById("products");
-console.log();
+
 if(env === 'dev'){
     if(segment[3] === ''){
         const siblings = client.parentElement.children;
@@ -41,21 +41,21 @@ $('.product').on('click',() =>{
 /**loading */
 
 /**by clicking this event, it hold the formular content and send this to the server.*/
-$('.backoffice .content .product-content').on('submit','.setting-product form',(e) =>{
+$('.backoffice #edit-product form').on('submit',(e) =>{
     e.preventDefault();
-    $('.backoffice .content .product-content .new-message-box').remove();
-    let pid = $(this).find("#pid").val();
-    let pname = $(this).find("#p-name").val();
-    let pdescrip = $(this).find("#p-descrip").val();
-    let pcateg = $(this).find("#p-categ option:selected").val();
-    let ppwith = $(this).find("#p-prixWith").val();
-    let ppwithout = $(this).find("#p-prixWithout").val();
-    let file = $(this).find('#formFile').get(0).files[0];
+    $('.backoffice #edit-product .new-message-box').remove();
+    let pid = $('.backoffice #edit-product form').find("#pid").val();
+    let pname = $('.backoffice #edit-product form').find("#p-name").val();
+    let pdescrip = $('.backoffice #edit-product form').find("#p-descrip").val();
+    let pcateg = $('.backoffice #edit-product form').find("#p-categ option:selected").val();
+    let ppwith = $('.backoffice #edit-product form').find("#p-prixWith").val();
+    let ppwithout = $('.backoffice #edit-product form').find("#p-prixWithout").val();
+    let file = $('.backoffice #edit-product form').find('#formFileEditProduct').get(0).files[0];
     
     if(pname == '' || pcateg == '' || ppwith == '' || ppwithout == ''){
         alert('Vos données saisis ne sont pas corrects, revérifiez vos champs et retentez la modification');
     }else{
-        $('.backoffice main .content .product-content .p-setting').text('').prepend($('.backoffice main .content .product-content .p-setting').attr('data-loading-text'));
+        $('.backoffice main #edit-product .p-setting').text('').prepend($('.backoffice main #edit-product .p-setting').attr('data-loading-text'));
         
         var data = new FormData();
         data.append('pid',pid);
@@ -81,16 +81,12 @@ $('.backoffice .content .product-content').on('submit','.setting-product form',(
             success : function(res) {
                 setTimeout(() => {
                     if(res.resultat){
-                        $('.backoffice main .content .product-content .p-setting').text('Modifier ce produit').find('i').remove();
-                        $('.backoffice main .content .product-content').prepend('<div class="new-message-box"><div class="new-message-box-success"><div class="info-tab tip-icon-success" title="succes"><i class="fas fa-check"></i><i></i></div><div class="tip-box-success"><p>'+res.resultat+'</p></div></div></div>');
-                        setTimeout(() => {
-                            $('.backoffice main .content .product-content .new-message-box').remove();
-                        }, 30000);
+                        window.location.href = RACINE + "admin/product";
                     }else if(res.sqlError){
-                        $('.backoffice main .content .product-content .p-setting').text('Modifier ce produit').find('i').remove();
-                        $('.backoffice main .content .product-content').prepend('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>'+res.sqlError+'</p></div></div></div>');
+                        $('.backoffice main #edit-product .p-setting').text('Modifier ce produit').find('i').remove();
+                        $('.backoffice main #edit-product').prepend('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>'+res.sqlError+'</p></div></div></div>');
                         setTimeout(() => {
-                            $('.backoffice main .content .product-content .new-message-box').remove();
+                            $('.backoffice main #edit-product .new-message-box').remove();
                         }, 30000);
                     }
                 }, 2000);
@@ -145,16 +141,16 @@ $('.backoffice #manage-categ .cdelete').on('click',function(){
 
 
 /**by clicking this event, it hold the formular content and send this to the server.*/
-$('.backoffice .content .product-content').on('submit','.setting-categ form',(e) =>{
+$('.backoffice #edit-categ form').on('submit',(e) =>{
     e.preventDefault();
-    $('.backoffice .content .product-content .new-message-box').remove();
-    let cname = $(this).find('#c-name').val();
-    let cid = $(this).find('#cid').val();
-    let file = $(this).find('#formFile').get(0).files[0];
+    $('.backoffice #edit-categ .new-message-box').remove();
+    let cname = $('.backoffice #edit-categ form').find('#c-name').val();
+    let cid = $('.backoffice #edit-categ form').find('#cid').val();
+    let file = $('.backoffice #edit-categ form').find('#formFileEditCateg').get(0).files[0];
     if(cname == ''){
         $(this).find('.categ').append('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>Veillez remplir le champs</p></div></div></div>');
     }else{
-        $('.backoffice main .content .product-content .c-save1').text('').prepend($('.backoffice main .content .product-content .c-save1').attr('data-loading-text'));
+        $('.backoffice main #edit-categ .c-save1').text('').prepend($('.backoffice main #edit-categ .c-save1').attr('data-loading-text'));
         var data = new FormData();
         data.append('cid',cid);
         data.append('postType','updateCategorie');
@@ -175,16 +171,12 @@ $('.backoffice .content .product-content').on('submit','.setting-categ form',(e)
             success : function(res) {
                 setTimeout(() => {
                     if(res.resultat){
-                        $('.backoffice main .content .product-content .c-save1').text('Modifier la catégorie du produit').find('i').remove();
-                        $('.backoffice main .content .product-content').prepend('<div class="new-message-box"><div class="new-message-box-success"><div class="info-tab tip-icon-success" title="success"><i class="fas fa-check"></i><i></i></div><div class="tip-box-success"><p>'+res.resultat+'</p></div></div></div>');
-                        setTimeout(() => {
-                            $('.backoffice main .content .product-content .new-message-box').remove();
-                        }, 30000);
+                        window.location.href = RACINE + "admin/category";
                     }else if(res.sqlError){
-                        $('.backoffice main .content .product-content .c-save1').text('Modifier la catégorie du produit').find('i').remove();
-                        $('.backoffice main .content .product-content').prepend('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>'+res.sqlError+'</p></div></div></div>');
+                        $('.backoffice main #edit-categ .c-save1').text('Modifier la catégorie du produit').find('i').remove();
+                        $('.backoffice main #edit-categ').prepend('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>'+res.sqlError+'</p></div></div></div>');
                         setTimeout(() => {
-                            $('.backoffice main .content .product-content .new-message-box').remove();
+                            $('.backoffice main #edit-categ .new-message-box').remove();
                         }, 30000);
                     }
                 }, 2000);
@@ -194,19 +186,19 @@ $('.backoffice .content .product-content').on('submit','.setting-categ form',(e)
 });
 
 /**by clicking this event, it hold the formular content and send this to the server.*/
-$('.backoffice .content .product-content').on('submit','.setting-extrat form',(e) =>{
+$('.backoffice #edit-extrat form').on('submit',(e) =>{
     e.preventDefault();
-    $('.backoffice .content .product-content .new-message-box').remove();
-    let sname = $(this).find('#s-name').val();
-    let sid = $(this).find('#sid').val();
-    let scateg = $(this).find('#categ-s').val();
-    let pcateg = $(this).find('#p-categ option:selected').val();
-    let sprix = $(this).find('#s-prix').val();
-    let file = $(this).find('#formFile').get(0).files[0];
+    $('.backoffice #edit-extrat .new-message-box').remove();
+    let sname = $('.backoffice #edit-extrat form').find('#s-name').val();
+    let sid = $('.backoffice #edit-extrat form').find('#sid').val();
+    let scateg = $('.backoffice #edit-extrat form').find('#categ-s').val();
+    let pcateg = $('.backoffice #edit-extrat form').find('#p-categ option:selected').val();
+    let sprix = $('.backoffice #edit-extrat form').find('#s-prix').val();
+    let file = $('.backoffice #edit-extrat form').find('#formFileEditExtrat').get(0).files[0];
     if(sname == '' || scateg == '' || pcateg == ''){
         alert('Vos données saisis ne sont pas corrects, revérifiez vos champs et retentez la modification');
     }else{
-        $('.backoffice main .content .product-content .s-setting').text('').prepend($('.backoffice main .content .product-content .s-setting').attr('data-loading-text'));
+        $('.backoffice main  #edit-extrat .s-setting').text('').prepend($('.backoffice main  #edit-extrat .s-setting').attr('data-loading-text'));
         var data = new FormData();
         data.append('eid',sid);
         data.append('postType','updateExtrat');
@@ -230,15 +222,10 @@ $('.backoffice .content .product-content').on('submit','.setting-extrat form',(e
             success : function(res) {
                 setTimeout(() => {
                     if(res.resultat){
-                        $('.backoffice main .content .product-content .s-setting').text('Modifier ce supplément').find('i').remove();
-                        $('.backoffice main .content .product-content').prepend('<div class="new-message-box"><div class="new-message-box-success"><div class="info-tab tip-icon-success" title="succes"><i class="fas fa-check"></i><i></i></div><div class="tip-box-success"><p>'+res.resultat+'</p></div></div></div>');
-                        $('.setting-extrat form')[0].reset();
-                        setTimeout(() => {
-                            $('.backoffice main .content .product-content .new-message-box').remove();
-                        }, 30000);
+                       window.location.href = RACINE + "admin/extrat";
                     }else if(res.sqlError){
-                        $('.backoffice main .content .product-content .s-setting').text('Modifier ce supplément').find('i').remove();
-                        $('.backoffice main .content .product-content').prepend('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>'+res.sqlError+'</p></div></div></div>');
+                        $('.backoffice main #edit-extrat .s-setting').text('Modifier ce supplément').find('i').remove();
+                        $('.backoffice main #edit-extrat').prepend('<div class="new-message-box"><div class="new-message-box-danger"><div class="info-tab tip-icon-danger" title="error"><i class="fas fa-times"></i><i></i></div><div class="tip-box-danger"><p>'+res.sqlError+'</p></div></div></div>');
                         setTimeout(() => {
                             $('.backoffice main .content .product-content .new-message-box').remove();
                         }, 30000);
@@ -307,7 +294,7 @@ $('.backoffice #add-extrat form').on('submit',(e) =>{
                     if(res.resultat){
                         $('.backoffice main #add-extrat .s-save').text('Ajouter un supplément').find('i').remove();
                         $('.backoffice main #add-extrat').prepend('<div class="new-message-box"><div class="new-message-box-success"><div class="info-tab tip-icon-success" title="succes"><i class="fas fa-check"></i><i></i></div><div class="tip-box-success"><p>'+res.resultat+'</p></div></div></div>');
-                        $('.create-extrat form')[0].reset();
+                        $('.backoffice main #add-extrat form')[0].reset();
                         setTimeout(() => {
                             $('.backoffice main #add-extrat .new-message-box').remove();
                         }, 30000);
@@ -400,7 +387,7 @@ $('.backoffice main #add form').on('submit',(e) =>{
                     if(res.resultat){
                         $('.backoffice main #add .p-save').text('Insérer le produit').find('i').remove();
                         $('.backoffice main #add').prepend('<div class="new-message-box"><div class="new-message-box-success"><div class="info-tab tip-icon-success" title="succes"><i class="fas fa-check"></i><i></i></div><div class="tip-box-success"><p>'+res.resultat+'</p></div></div></div>');
-                        $('.create-product form')[0].reset();
+                        $('.backoffice main #add form')[0].reset();
                         setTimeout(() => {
                             $('.backoffice main #add .new-message-box').remove();
                         }, 30000);
