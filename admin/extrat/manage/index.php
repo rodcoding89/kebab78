@@ -20,6 +20,7 @@
 	}
 
 	$option .= '</select></div>';
+    $title = "Gestion des suppléments - Kebab78";
 	require_once '../../nav.php';
 ?>
 <div id="edit-extrat" class="product-content setting-extrat">
@@ -45,8 +46,9 @@
 	        <input type="hidden" class="img-url" value="<?php echo htmlspecialchars($resultat['img_url']); ?>"/>
 	        <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($resultat['img_url']); ?>">
 	    </div>
+        <span style="font-style:italic;font-size:12px;">Button désactivé pour les tests</span>
 	    <div class="submit mb-3">
-	        <button type="submit" class="btn btn-primary w-100 mt-4 py-10 s-setting" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier ce supplément</button>
+	        <button style="pointer-events:none;opacity:.5" type="submit" class="btn btn-primary w-100 mt-4 py-10 s-setting" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier ce supplément</button>
 	    </div>
 	</form>
 

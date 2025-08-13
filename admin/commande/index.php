@@ -1,6 +1,6 @@
 <?php
 	require_once dirname(dirname(__DIR__)).'/inc/init.php';
-	
+	$title = "Liste Commandes - Kebab78";
     require_once '../nav.php';
     function extratFromAssociativeArray($data){
         $li = '';
@@ -28,7 +28,7 @@
     }
     function initStatus ($status,$from,$orderId){
         $statusText = '';
-        $spanStyle = 'font-size:11px; padding:5px 10px; border-radius:.5rem; color:white;display:block;width:max-content;'.($from != 'status' ? 'cursor:pointer;':';');
+        $spanStyle = 'font-size:11px; padding:5px 10px; border-radius:.5rem; color:white;display:block;width:max-content;'.($from != 'status' ? 'cursor:pointer;pointer-events:none;opacity:.5;':';');
 
         if ($status == 'pending') {
             $statusText = '<span style="' . $spanStyle . 'background-color:yellowgreen;">En attente</span>';

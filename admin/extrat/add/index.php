@@ -10,6 +10,7 @@
 	    $option .= '<option value="' . htmlspecialchars($category['categorie_id']) . '">' . htmlspecialchars(strtolower($category['categorie_name'])) . '</option>';
 	}
 	$option .= '</select></div>';
+    $title = "Ajouter un supplément - Kebab78";
 	require_once '../../nav.php';
 ?>
 <div id="add-extrat" class="product-content create-extrat">
@@ -31,8 +32,9 @@
 			<label for="formFileExtrat" class="form-label">Choisir une image pour le supplément</label>
 			<input class="form-control" type="file" id="formFileExtrat" accept="image/*" name="file">
 		</div>
+        <span style="font-style:italic;font-size:12px;">Button désactivé pour les tests</span>
 		<div class="submit mb-3">
-			<button type="submit" class="btn btn-primary w-100 mt-4 py-10 s-save" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Ajouter un supplément</button>
+			<button style="pointer-events:none;opacity:.5" type="submit" class="btn btn-primary w-100 mt-4 py-10 s-save" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Ajouter un supplément</button>
 		</div>
 	</form>
 </div>

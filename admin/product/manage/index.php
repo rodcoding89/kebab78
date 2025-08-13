@@ -21,6 +21,7 @@
 	}
 
 	$option .= '</select></div>';
+    $title = "Gestion des Produits - Kebab78";
 	require_once '../../nav.php';
 ?>
 <div id="edit-product" class="product-content">
@@ -54,8 +55,9 @@
 		        </div>
 		        <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($productItem['img_url']); ?>">
 		    </div>
+            <span style="font-style:italic;font-size:12px;">Button désactivé pour les tests</span>
 		    <div class="submit mb-3">
-		        <button type="submit" class="btn btn-primary w-100 mt-4 py-10 p-setting" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier ce produit</button>
+		        <button style="pointer-events:none;opacity:.5" type="submit" class="btn btn-primary w-100 mt-4 py-10 p-setting" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier ce produit</button>
 		    </div>
 		</form>
 	</div>

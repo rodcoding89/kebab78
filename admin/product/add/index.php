@@ -10,6 +10,7 @@
 	    $option .= '<option value="' . htmlspecialchars($category['categorie_id']) . '">' . htmlspecialchars(strtolower($category['categorie_name'])) . '</option>';
 	}
 	$option .= '</select></div>';
+    $title = "Ajouter un Produit - Kebab78";
 	require_once '../../nav.php';
 ?>
 <div id="add" class="product-content create-product">
@@ -33,8 +34,9 @@
 			<label for="formFile" class="form-label">Choisir une image pour le produit</label>
 			<input class="form-control" type="file" id="formFile" accept="image/*" name="file">
 		</div>
+        <span style="font-style:italic;font-size:12px;">Button désactivé pour les tests</span>
 		<div class="submit mb-3">
-				<button type="submit" class="btn btn-primary w-100 mt-4 py-10 p-save" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Insérer le produit</button>
+				<button style="pointer-events:none;opacity:.5" type="submit" class="btn btn-primary w-100 mt-4 py-10 p-save" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Insérer le produit</button>
 			</div>
 		</form>
 	</div>

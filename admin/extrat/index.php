@@ -28,7 +28,7 @@
 		        }
 		    }
 
-		    $table .= '<td><div style="display:flex;gap:10px;"><a href="'.RACINE.'admin/extrat/manage?extratId='.htmlspecialchars($resultat['extrat_id']).'"><i class="fas fa-cog setting" style="cursor:pointer;"></i></a><span class="delete"><i class="fas fa-trash-alt" style="cursor:pointer;"><input type="hidden" value="' . htmlspecialchars($resultat['extrat_id']) . '"></i></span></div></td>';
+		    $table .= '<td><div style="display:flex;gap:10px;"><a href="'.RACINE.'admin/extrat/manage?extratId='.htmlspecialchars($resultat['extrat_id']).'"><i class="fas fa-cog setting" style="cursor:pointer;"></i></a><span style="pointer-events:none;opacity:.5" class="delete"><i class="fas fa-trash-alt" style="cursor:pointer;"><input type="hidden" value="' . htmlspecialchars($resultat['extrat_id']) . '"></i></span></div></td>';
 		    $table .= '</tr>';
 		}
 
@@ -39,6 +39,7 @@
     } else {
         $extrat = '<div>Vous n\'avez pour l\'instant inséré aucun supplément</div>';
     }
+    $title = "Liste de suppléments - Kebab78";
     require_once '../nav.php';            
 ?>
 

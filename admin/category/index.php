@@ -13,7 +13,7 @@
 		    $table .= '<td>' . htmlspecialchars($el['categorie_id']) . '</td>';
 		    $table .= '<td>' . htmlspecialchars($el['categorie_name']) . '</td>';
 		    $table .= '<td><img src="' . RACINE . htmlspecialchars($el['img_url']) . '" style="width:80px;"/></td>';
-		    $table .= '<td><div style="display:flex;gap:10px;"><a href="'.RACINE.'admin/category/manage?categoryId='.htmlspecialchars($el['categorie_id']).'"><i class="fas fa-cog csetting" style="cursor:pointer;"></i></a><span class="cdelete"><i class="fas fa-trash-alt" style="cursor:pointer;"><input type="hidden" value="' . htmlspecialchars($el['categorie_id']) . '"></i></span></div></td>';
+		    $table .= '<td><div style="display:flex;gap:10px;"><a href="'.RACINE.'admin/category/manage?categoryId='.htmlspecialchars($el['categorie_id']).'"><i class="fas fa-cog csetting" style="cursor:pointer;"></i></a><span style="pointer-events:none;opacity:.5" class="cdelete"><i class="fas fa-trash-alt" style="cursor:pointer;"><input type="hidden" value="' . htmlspecialchars($el['categorie_id']) . '"></i></span></div></td>';
 		    $table .= '</tr>';
 		}
 
@@ -23,6 +23,7 @@
     } else {
         $categories = '<div>Vous n\'avez pour l\'instant inséré aucune catégorie</div>';
     }
+    $title = "Liste de Catégories - Kebab78";
     require_once '../nav.php';            
 ?>
 

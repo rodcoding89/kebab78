@@ -27,7 +27,7 @@
 		    $table .= '<td>' . $product['prix_sans_livraison'] . '</td>';
 		    $table .= '<td>' . $product['prix_avec_livraison'] . '</td>';
 		    $table .= '<td><img src="' . RACINE . $product['img_url'] . '" style="width:80px;"/></td>';
-		    $table .= '<td><div style="display:flex;gap:10px;"><a href="'.RACINE.'admin/product/manage?productId='. $product['product_id'].'"><i class="fas fa-cog psetting" style="cursor:pointer;"></i><a/><span class="delProduct"><i class="fas fa-trash-alt" style="cursor:pointer;"><input type="hidden" value="' . $product['product_id'] . '"></i></span></div></td>';
+		    $table .= '<td><div style="display:flex;gap:10px;"><a  href="'.RACINE.'admin/product/manage?productId='. $product['product_id'].'"><i class="fas fa-cog psetting" style="cursor:pointer;"></i><a/><span style="pointer-events:none;opacity:.5" class="delProduct"><i class="fas fa-trash-alt" style="cursor:pointer;"><input type="hidden" value="' . $product['product_id'] . '"></i></span></div></td>';
 		    $table .= '</tr>';
 		}
 
@@ -37,6 +37,7 @@
     } else {
         $productData = '<div>Vous n\'avez pour l\'instant inséré aucun produit</div>';
     }
+    $title = "Liste Produit - Kebab78";
     require_once '../nav.php';            
 ?>
 

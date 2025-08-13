@@ -5,6 +5,7 @@
         ':cid' => $categoryId
     ));
     $resultat = $result->fetch(PDO::FETCH_ASSOC);
+    $title = "Gestion des Catégories - Kebab78";
 	require_once '../../nav.php';
 ?>
 <div id="edit-categ" class="product-content">
@@ -22,8 +23,9 @@
 	            <input type="hidden" class="img-url" value="<?php echo htmlspecialchars($resultat['img_url']); ?>">
 	            <img style="width:70px;height:auto;" src="<?php echo RACINE.htmlspecialchars($resultat['img_url']); ?>">
 	        </div>
+            <span style="font-style:italic;font-size:12px;">Button désactivé pour les tests</span>
 	        <div class="submit mb-3">
-	            <button type="submit" class="btn btn-primary w-100 mt-4 py-10 c-save1" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier la catégorie du produit</button>
+	            <button style="pointer-events:none;opacity:.5" type="submit" class="btn btn-primary w-100 mt-4 py-10 c-save1" id="load2" data-loading-text="Traitement en cours <i class='fa fa-spinner fa-spin'></i>">Modifier la catégorie du produit</button>
 	        </div>
 	    </form>
 	</div>

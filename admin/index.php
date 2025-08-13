@@ -4,7 +4,7 @@
         header('location:'.RACINE);
         exit;
     }
-    $title = "Gestion du restaurant";
+    $title = "Liste Client - Kebab78";
 
     require_once 'nav.php';
 
