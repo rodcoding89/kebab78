@@ -16,7 +16,7 @@ if (!isset($_SESSION['orders'])) {
 }
 
 $orders = $_SESSION['orders'];
-//debug($_SESSION['mode']);
+debug($_SESSION['mode']);
 $totalCount = 0;
 foreach ($orders as $key => $value) {
     $totalCount += $value['total'];

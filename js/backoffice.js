@@ -1,8 +1,8 @@
 /**heer we check if we are in the backoffice page */
 
 /**this click event hide some content and display another one */
-let env = 'dev';
-let RACINE = env === 'prod' ? '' : '/Kebab78/';
+
+console.log("node_env",node_env);
 
 const url = window.location.href;
 const newUrl = new URL(url);
@@ -11,7 +11,7 @@ const client = document.getElementById("clients");
 const commande = document.getElementById("commandes");
 const product = document.getElementById("products");
 
-if(env === 'dev'){
+if(node_env === 'dev'){
     if(segment[3] === ''){
         const siblings = client.parentElement.children;
         for (var i = 0; i < siblings.length; i++) {
@@ -19,6 +19,27 @@ if(env === 'dev'){
         }
         client.classList.add("active");
     }else if(segment[3] === 'commande'){
+        const siblings = commande.parentElement.children;
+        for (var i = 0; i < siblings.length; i++) {
+            siblings[i].classList.remove("active");
+        }
+        commande.classList.add("active");
+    }else{
+        const siblings = product.parentElement.children;
+        for (var i = 0; i < siblings.length; i++) {
+            siblings[i].classList.remove("active");
+        }
+        product.classList.add("active");
+    }
+}else{
+
+    if(segment[2] === ''){
+        const siblings = client.parentElement.children;
+        for (var i = 0; i < siblings.length; i++) {
+            siblings[i].classList.remove("active");
+        }
+        client.classList.add("active");
+    }else if(segment[2] === 'commande'){
         const siblings = commande.parentElement.children;
         for (var i = 0; i < siblings.length; i++) {
             siblings[i].classList.remove("active");

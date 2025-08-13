@@ -1,6 +1,5 @@
-let env = 'dev';
-let RACINE = env === 'prod' ? '' : '/Kebab78/';
-console.log(RACINE);
+
+console.log("racine",RACINE);
 $(function(){
     if($('main .kebab').length){
         /** we submit the form. Inside the submit event, we get the necessary parameter and send this to the server. In the callback function we check the status of the response */
